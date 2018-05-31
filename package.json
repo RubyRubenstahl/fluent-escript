@@ -1,0 +1,25 @@
+{
+  "name": "fluent-escript",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "e:script",
+    "programmer",
+    "e:cue",
+    "ecue",
+    "lighting",
+    "dmx512",
+    "artnet",
+    "lighting",
+    "control",
+    "LAS",
+    "escript",
+    "traxon"
+  ],
+  "author": "Ruby Rubenstahl",
+  "license": "MIT"
+}
