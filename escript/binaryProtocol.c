@@ -164,9 +164,9 @@ function runAction(int instructionCode){
 
 	  //GOTOCUE
 	  case 18:
-	      int cuelist = readNum();
-	      int cue = readNum();
-	      int jump = readNum();
+	      int cuelist = readNum(offset);
+	      int cue = readNum(offset);
+	      int jump = readNum(offset);
 		  CuelistGotoCue(cuelist, cue, jump)
 		  break;
 
