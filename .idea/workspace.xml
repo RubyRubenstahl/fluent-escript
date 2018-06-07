@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df4041f0-4cf0-448f-8eb4-98b2cdd355be" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/escript/binaryProtocol.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/escript/createZone.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/compileScript.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/createServer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/cuelistPlay.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,20 +40,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="17">
-                  <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+                <state relative-caret-position="51">
+                  <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="instructionCodes.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="instructionCodes.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/instructionCodes.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="612">
-                  <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+                <state relative-caret-position="442">
+                  <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
                 </state>
               </provider>
             </entry>
@@ -84,16 +74,16 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/actions/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="242">
-                  <caret line="404" column="5" lean-forward="true" selection-start-line="404" selection-start-column="5" selection-end-line="404" selection-end-column="5" />
+                <state relative-caret-position="241">
+                  <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/server/index.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state>
@@ -142,6 +132,8 @@
       <find>createScript.proto</find>
       <find>cueliststo</find>
       <find>VM</find>
+      <find>cueliststart</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -164,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/lib/compileAction.js" />
         <option value="$PROJECT_DIR$/src/lib/compileInstruction.js" />
         <option value="$PROJECT_DIR$/src/lib/tokenizeInstruction.js" />
-        <option value="$PROJECT_DIR$/src/actions/index.js" />
         <option value="$PROJECT_DIR$/escript/createZone.c" />
         <option value="$PROJECT_DIR$/escript/binaryProtocol.c" />
         <option value="$PROJECT_DIR$/src/server/server.js" />
@@ -175,6 +166,7 @@
         <option value="$PROJECT_DIR$/src/server/createServer.js" />
         <option value="$PROJECT_DIR$/src/actions/test.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
+        <option value="$PROJECT_DIR$/src/actions/index.js" />
       </list>
     </option>
   </component>
@@ -227,12 +219,6 @@
               <item name="fluent-escript" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="actions" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fluent-escript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fluent-escript" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fluent-escript" type="b2602c69:ProjectViewProjectNode" />
@@ -314,12 +300,12 @@
       <updated>1526786538212</updated>
       <workItem from="1526786539403" duration="4866000" />
       <workItem from="1527795528181" duration="10847000" />
-      <workItem from="1528325661229" duration="14473000" />
+      <workItem from="1528325661229" duration="16309000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30186000" />
+    <option name="totallyTimeSpent" value="32022000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -609,13 +595,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/instructionCodes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/actions/cuelistPlay.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -671,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/actions/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="404" column="5" lean-forward="true" selection-start-line="404" selection-start-column="5" selection-end-line="404" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -687,8 +659,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
+        <state relative-caret-position="51">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/instructionCodes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/actions/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
         </state>
       </provider>
     </entry>

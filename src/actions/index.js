@@ -33,7 +33,7 @@ createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
     "cuePlay",
     { cuelistIndex, cueIndex, jump },
     {
-      command: "CUESTART",
+      command: "GOTOCUE",
       params: [cuelistIndex, cueIndex, jump]
     }
   );
