@@ -1,278 +1,413 @@
-const Programmer = function ({ transport }){
+const { tokenizeInstruction } = require("../lib");
+
+const createScript = function(name) {
   this.actions = [];
-  this.transport = transport;
+  this.name=name;
   return this;
 };
 
-Programmer.prototype.cuelistPlay = function(cuelistIndex){
+// Tokenize the instruction and push the action onto the action list.
+createScript.prototype.pushAction = function(name, arguments, instructions) {
   this.actions.push({
-    command: "CUELISTSTART",
-    params: [cuelistIndex]
+    name,
+    arguments,
+    instructions,
+    tokenized: tokenizeInstruction(instructions)
   });
+};
+
+createScript.prototype.cuelistPlay = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistPlay",
+    { cuelistIndex },
+    {
+      command: "CUELISTSTART",
+      params: [cuelistIndex]
+    }
+  );
   return this;
 };
 
-Programmer.prototype.cuelistStop = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTSTOP",
-    params: [cuelistIndex]
-  });
+createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
+  this.pushAction(
+    "cuePlay",
+    { cuelistIndex, cueIndex, jump },
+    {
+      command: "CUESTART",
+      params: [cuelistIndex, cueIndex, jump]
+    }
+  );
   return this;
 };
 
-Programmer.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true){
-  this.actions.push({
-    command: "CUELISTSTOP",
-    params: [index]
-  });
+createScript.prototype.cuelistStop = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistStop",
+    { cuelistIndex },
+    {
+      command: "CUELISTSTOP",
+      params: [cuelistIndex]
+    }
+  );
   return this;
 };
 
- Programmer.prototype.cuelistDeleteAllCues = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTDELETEALLCUES",
-    params: [cuelistIndex]
-  });
-  return this;
-}
-
- Programmer.prototype.mutexGroupStop = function(mutexId){
-  this.actions.push({
-    command: "CUELISTMUTEXRELEASE",
-    params: [mutexId]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistSkipBack = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTSKIPBACKWARD",
-    params: [cuelistIndex]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistSkipForward = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTSKIPFORWARD",
-    params: [cuelistIndex]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistSetMutexId = function(cuelistIndex, mutexId){
-  this.actions.push({
-    command: "SETMUTEXID",
-    params: [cuelistIndex, mutexId]
-  });
-  return this;
-}
-
- Programmer.prototype.setSubmasterValue = function(cuelistIndex, value){
-  this.actions.push({
-    command: "SETCUELISTSUBMASTERVALUE",
-    params: [cuelistIndex, value]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistCopy = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTCOPY",
-    params: [cuelistIndex]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistPaste = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTPASTE",
-    params: [cuelistIndex]
-  });
-  return this;
-}
-
- Programmer.prototype.cuelistSetName = function(cuelistIndex, name){
-  this.actions.push({
-    command: "CUELISTSETNAME",
-    params: []
-  });
+createScript.prototype.cuelistDeleteAllCues = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistDeleteAllCues",
+    { cuelistIndex },
+    {
+      command: "CUELISTDELETEALLCUES",
+      params: [cuelistIndex]
+    }
+  );
   return this;
 };
 
- Programmer.prototype.cuelistPause = function(cuelistIndex){
-  this.actions.push({
-    command: "CUELISTPAUSE",
-    params: [cuelistIndex]
-  });
+createScript.prototype.mutexGroupStop = function(mutexId) {
+  this.pushAction(
+    "mutexGroupStop",
+    { mutexId },
+    {
+      command: "CUELISTMUTEXRELEASE",
+      params: [mutexId]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.stopAll = function(){
-  this.actions.push({
-    command: "CUELISTSTOPALL",
-    params: []
-  });
+createScript.prototype.cuelistSkipBack = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistSkipBack",
+    { cuelistIndex },
+    {
+      command: "CUELISTSKIPBACKWARD",
+      params: [cuelistIndex]
+    }
+  );
   return this;
-}
+};
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+createScript.prototype.cuelistSkipForward = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistSkipForward",
+    { cuelistIndex },
+    {
+      command: "CUELISTSKIPFORWARD",
+      params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cuelistSetMutexId = function(cuelistIndex, mutexId) {
+  this.pushAction(
+    "cuelistSetMutexId",
+    { cuelistIndex, mutexId },
+    {
+      command: "SETMUTEXID",
+      params: [cuelistIndex, mutexId]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.setSubmasterValue = function(cuelistIndex, value) {
+  this.pushAction(
+    "setSubmasterValue",
+    { cuelistIndex, value },
+    {
+      command: "SETCUELISTSUBMASTERVALUE",
+      params: [cuelistIndex, value]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cuelistCopy = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistCopy",
+    { cuelistIndex },
+    {
+      command: "CUELISTCOPY",
+      params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cuelistPaste = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistPaste",
+    { cuelistIndex },
+    {
+      command: "CUELISTPASTE",
+      params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cuelistSetName = function(cuelistIndex, name) {
+  this.pushAction(
+    "cuelistSetName",
+    { cuelistIndex, name },
+    {
+      command: "CUELISTSETNAME",
+      params: []
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cuelistPause = function(cuelistIndex) {
+  this.pushAction(
+    "cuelistPause",
+    { cuelistIndex },
+    {
+      command: "CUELISTPAUSE",
+      params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.stopAll = function() {
+  this.pushAction(
+    "stopAll",
+    {},
+    {
+      command: "CUELISTSTOPALL",
+      params: []
+    }
+  );
+  return this;
+};
+
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "CUELISTSETPROPERTY",
     params: []
   });
   return this;
-} */
+}; */
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "CUESETPROPERTY",
     params: []
   });
   return this;
-} */
+}; */
 
- Programmer.prototype.cueDelete = function(cuelistIndex, cueIndex){
-  this.actions.push({
-    command: "DELETECUE",
-    params: [cuelistIndex, cueIndex]
-  });
+createScript.prototype.cueDelete = function(cuelistIndex, cueIndex) {
+  this.pushAction(
+    "cueDelete",
+    { cuelistIndex, cueIndex },
+    {
+      command: "DELETECUE",
+      params: [cuelistIndex, cueIndex]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.cueSetName = function(cuelistIndex, cueIndex, name){
-  this.actions.push({
-    command: "SETCUENAME",
-    params: [cuelistIndex, cueIndex, name]
-  });
+createScript.prototype.cueSetName = function(cuelistIndex, cueIndex, name) {
+  this.pushAction(
+    "cueSetName",
+    { cuelistIndex, cueIndex, name },
+    {
+      command: "SETCUENAME",
+      params: [cuelistIndex, cueIndex, name]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.cueRecord = function(cuelistIndex, name){
-  this.actions.push({
-    command: "RECORDCUE",
-    params: [cuelistIndex, name]
-  });
+createScript.prototype.cueRecord = function(cuelistIndex, name) {
+  this.pushAction(
+    "cueRecord",
+    { cuelistIndex, name },
+    {
+      command: "RECORDCUE",
+      params: [cuelistIndex, name]
+    }
+  );
   return this;
-}
+};
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "SETLEVEL",
     params: []
   });
   return this;
-} */
+}; */
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "SETRGBW",
     params: []
   });
   return this;
-} */
+}; */
 
- Programmer.prototype.proClear = function(){
-  this.actions.push({
-    command: "PROCLEAR",
-    params: []
-  });
+createScript.prototype.proClear = function() {
+  this.pushAction(
+    "proClear",
+    {},
+    {
+      command: "PROCLEAR",
+      params: []
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.grpUse = function(groupName, expand=false){
-  this.actions.push({
-    command: "GRPUSE",
-    params: [groupName, expand]
-  });
+createScript.prototype.grpUse = function(groupName, expand = false) {
+  this.pushAction(
+    "grpUse",
+    { groupName, expand },
+    {
+      command: "GRPUSE",
+      params: [groupName, expand]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.grpCreate = function(name, selectedOnly=true){
-  this.actions.push({
-    command: "GRPCREATE",
-    params: [name, selectedOnly]
-  });
+createScript.prototype.grpCreate = function(name, selectedOnly = true) {
+  this.pushAction(
+    "grpCreate",
+    { name, selectedOnly },
+    {
+      command: "GRPCREATE",
+      params: [name, selectedOnly]
+    }
+  );
   return this;
-}
+};
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "SETSWITCHSTATE",
     params: []
   });
   return this;
-} */
+}; */
 
- Programmer.prototype.vmSetLevel = function(vmIndex, value){
-  this.actions.push({
-    command: "VMSETLEVEL",
-    params: [vmIndex, value]
-  });
+createScript.prototype.vmSetLevel = function(vmIndex, value) {
+  this.pushAction(
+    "vmSetLevel",
+    { vmIndex, value },
+    {
+      command: "VMSETLEVEL",
+      params: [vmIndex, value]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.mediaContinue = function(playerIndex){
-  this.actions.push({
-    command: "MEDIACONTINUE",
-    params: [playerIndex]
-  });
+createScript.prototype.mediaContinue = function(playerIndex) {
+  this.pushAction(
+    "mediaContinue",
+    { playerIndex },
+    {
+      command: "MEDIACONTINUE",
+      params: [playerIndex]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.mediaPause = function(playerIndex){
-  this.actions.push({
-    command: "MEDIAPAUSE",
-    params: [playerIndex]
-  });
+createScript.prototype.mediaPause = function(playerIndex) {
+  this.pushAction(
+    "mediaPause",
+    { playerIndex },
+    {
+      command: "MEDIAPAUSE",
+      params: [playerIndex]
+    }
+  );
   return this;
-}
+};
 
- Programmer.mediaPlay = function(playerIndex, filePath, repeat=true, fullscreen=false){
-  this.actions.push({
-    command: "MEDIAPLAY",
-    params: [playerIndex, repeat | fullscreen, filePath]
-  });
+createScript.prototype.mediaPlay = function(
+  playerIndex,
+  filePath,
+  repeat = true,
+  fullscreen = false
+) {
+  this.pushAction(
+    "mediaPlay",
+    { playerIndex, filePath, repeat, fullscreen },
+    {
+      command: "MEDIAPLAY",
+      params: [playerIndex, repeat | fullscreen, filePath]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.mediaSetVolume = function(playerIndex, value){
-  this.actions.push({
-    command: "MEDIASETVOLUME",
-    params: [playerIndex, value]
-  });
+createScript.prototype.mediaSetVolume = function(playerIndex, value) {
+  this.pushAction(
+    "mediaSetVolume",
+    { playerIndex, value },
+    {
+      command: "MEDIASETVOLUME",
+      params: [playerIndex, value]
+    }
+  );
   return this;
-}
+};
 
- Programmer.prototype.mediaStop = function(playerIndex){
-  this.actions.push({
-    command: "MEDIASTOP",
-    params: [playerIndex]
-  });
+createScript.prototype.mediaStop = function(playerIndex) {
+  this.pushAction(
+    "mediaStop",
+    { playerIndex },
+    {
+      command: "MEDIASTOP",
+      params: [playerIndex]
+    }
+  );
   return this;
-}
+};
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "GETCUELISTS",
     params: []
   });
   return this;
-} */
+}; */
 
-/* Programmer.prototype.xxxx = function(){
-  this.actions.push({
+/* createScript.prototype.xxxx = function(){
+  this.pushAction(
+  ',
+  {(,
+  {
     command: "GETSHOWSTATE",
     params: []
   });
   return this;
-} */
+}; */
 
-
-
-
-Programmer.prototype.run = function(){
-  this.actions.map(action => this.transport(action));
-};
-
-module.exports = Programmer;
+module.exports = (name)=> new createScript(name);
