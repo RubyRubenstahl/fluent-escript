@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df4041f0-4cf0-448f-8eb4-98b2cdd355be" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/escript/binaryProtocol.c" beforeDir="false" afterPath="$PROJECT_DIR$/escript/binaryProtocol.c" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -52,7 +51,7 @@
           <file leaf-file-name="instructionCodes.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/instructionCodes.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="442">
+                <state relative-caret-position="595">
                   <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
                 </state>
               </provider>
@@ -74,11 +73,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/actions/index.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="241">
                   <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="binaryProtocol.c" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/escript/binaryProtocol.c">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="235">
+                  <caret line="167" column="30" lean-forward="true" selection-end-line="336" selection-end-column="10" />
                 </state>
               </provider>
             </entry>
@@ -134,6 +142,8 @@
       <find>VM</find>
       <find>cueliststart</find>
       <find>start</find>
+      <find>cuepl</find>
+      <find>goto</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -157,7 +167,6 @@
         <option value="$PROJECT_DIR$/src/lib/compileInstruction.js" />
         <option value="$PROJECT_DIR$/src/lib/tokenizeInstruction.js" />
         <option value="$PROJECT_DIR$/escript/createZone.c" />
-        <option value="$PROJECT_DIR$/escript/binaryProtocol.c" />
         <option value="$PROJECT_DIR$/src/server/server.js" />
         <option value="$PROJECT_DIR$/src/lib/index.js" />
         <option value="$PROJECT_DIR$/src/lib/test.js" />
@@ -167,6 +176,7 @@
         <option value="$PROJECT_DIR$/src/actions/test.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
         <option value="$PROJECT_DIR$/src/actions/index.js" />
+        <option value="$PROJECT_DIR$/escript/binaryProtocol.c" />
       </list>
     </option>
   </component>
@@ -300,12 +310,12 @@
       <updated>1526786538212</updated>
       <workItem from="1526786539403" duration="4866000" />
       <workItem from="1527795528181" duration="10847000" />
-      <workItem from="1528325661229" duration="16309000" />
+      <workItem from="1528325661229" duration="16666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32022000" />
+    <option name="totallyTimeSpent" value="32379000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -321,16 +331,16 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TypeScript" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4972477" visible="true" weight="0.2159451" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49752066" visible="true" weight="0.2159451" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32897604" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" sideWeight="0.5027523" side_tool="true" visible="true" weight="0.2159451" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.33296582" />
+      <window_info id="Structure" order="1" sideWeight="0.5024793" side_tool="true" visible="true" weight="0.2159451" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33296582" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39911798" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39911798" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -573,13 +583,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/escript/binaryProtocol.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="203" column="14" selection-start-line="203" selection-start-column="14" selection-end-line="203" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/lib/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -666,7 +669,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/instructionCodes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
+        <state relative-caret-position="595">
           <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
         </state>
       </provider>
@@ -675,6 +678,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="241">
           <caret line="35" column="23" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/escript/binaryProtocol.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="167" column="30" lean-forward="true" selection-end-line="336" selection-end-column="10" />
         </state>
       </provider>
     </entry>

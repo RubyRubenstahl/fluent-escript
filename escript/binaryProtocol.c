@@ -164,7 +164,10 @@ function runAction(int instructionCode){
 
 	  //GOTOCUE
 	  case 18:
-		  notImplemented(instructionCode);
+	      int cuelist = readNum();
+	      int cue = readNum();
+	      int jump = readNum();
+		  CuelistGotoCue(cuelist, cue, jump)
 		  break;
 
 	  //SETCUENAME
