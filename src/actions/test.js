@@ -1,13 +1,16 @@
 const createScript = require('./index');
+const {createServer} = require('../server');
 
+const server = createServer();
 
 
 const script = createScript('testScript')
-    .cuelistStop(5)
+    .cuelistPlay(0)
+    .cuelistPlay(1)
+    .cuelistPlay(2)
     .cuelistPlay(3)
-    .grpUse('Test')
-    .cueRecord(5, "Test");
 
+server.runScript(script);
 
 console.log(script);
 

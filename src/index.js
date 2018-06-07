@@ -1,3 +1,3 @@
-const actions = require('./actions');
+module.exports.createScript = require('./actions');
+module.exports.createServer = require('./server').createServer;
 
-module.exports = {...actions};

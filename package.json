@@ -21,5 +21,9 @@
     "traxon"
   ],
   "author": "Ruby Rubenstahl",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash.get": "^4.4.2",
+    "smart-buffer": "^4.0.1"
+  }
 }
