@@ -14,288 +14,331 @@ string actions[100];
 int debug = 0;
 createActionTable();
 
-function OnUdp(int nDriverHandle){
+function OnUdp(int nDriverHandle)
+{
 	BobSetRange(nBob, 0, BobGetSize(nBob), 0);
-	offset=0;
-	packetComplete=0;
+	offset = 0;
+	packetComplete = 0;
 	packetLength = ReceiveFrom(nDriverHandle, nBob, sIpAddress, nPort);
-    //printf("Received, length=%d\n", packetLength);
-	if (packetLength <= 0){return;}
+	//printf("Received, length=%d\n", packetLength);
+	if (packetLength <= 0)
+	{
+		return;
+	}
 	//startNewResponse();
 	processNextInstruction();
 	//endResponse();
 	//sendResponse();
 }
 
-
-function processNextInstruction(){
+function processNextInstruction()
+{
 	int instruction;
-	if(debug){printf("##################### NEW PACKET ######################\n");}
-	while(!packetComplete){
+	if (debug)
+	{
+		printf("##################### NEW PACKET ######################\n");
+	}
+	while (!packetComplete)
+	{
 		instruction = readNum(offset);
-		if(instruction > (size(actions) - 1)){
+		if (instruction > (size(actions) - 1))
+		{
 			alert("Instruction code out of range: %d\n", instruction);
 			return;
 		}
-		if(instruction == 0){
+		if (instruction == 0)
+		{
 			packetComplete = 1;
-
 		}
-		else {
+		else
+		{
 			action = actions[instruction];
-			if(debug){printf("Instruction Code: %d\n", instruction);}
-			if(debug){printf("Action: %s\n", action);}
+			if (debug)
+			{
+				printf("Instruction Code: %d\n", instruction);
+			}
+			if (debug)
+			{
+				printf("Action: %s\n", action);
+			}
 			runAction(instruction);
 		}
-		if(debug){printf("\n");}
+		if (debug)
+		{
+			printf("\n");
+		}
 	}
-	if(debug){printf("Packet completed - Final offset: %d\n", offset);}
-	if(debug){printf("\n\n\n");}
+	if (debug)
+	{
+		printf("Packet completed - Final offset: %d\n", offset);
+	}
+	if (debug)
+	{
+		printf("\n\n\n");
+	}
 }
 
-
-function readNum(int readOffset){
+function readNum(int readOffset)
+{
 	offset += 2;
-	int value = BobGetAt16(nBob,readOffset);
-	if(debug){printf("offset: %d, type: int16, value: %d\n", readOffset, value);}
+	int value = BobGetAt16(nBob, readOffset);
+	if (debug)
+	{
+		printf("offset: %d, type: int16, value: %d\n", readOffset, value);
+	}
 	return value;
 }
 
 string sArg;
-function readString(int readOffset){
-	sArg = BobGetString(nBob,readOffset, 255);
-	if(debug){printf("offset: %d, type: string, value: %s\n", readOffset, sArg);}
-	offset += strlen(sArg)+1;
+function readString(int readOffset)
+{
+	sArg = BobGetString(nBob, readOffset, 255);
+	if (debug)
+	{
+		printf("offset: %d, type: string, value: %s\n", readOffset, sArg);
+	}
+	offset += strlen(sArg) + 1;
 }
 
+function runAction(int instructionCode)
+{
+	switch (instructionCode)
+	{
+	//PACKETID
+	case 1:
+		notImplemented(instructionCode);
+		break;
 
+	//CUELISTDELETEALLCUES
+	case 2:
+		notImplemented(instructionCode);
+		break;
 
+	//CUELISTMUTEXRELEASE
+	case 3:
+		notImplemented(instructionCode);
+		break;
 
-function runAction(int instructionCode){
-	switch(instructionCode){
-	  //PACKETID
-	  case 1:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTSKIPBACKWARD
+	case 4:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTDELETEALLCUES
-	  case 2:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTSKIPBACKWARD
+	case 5:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTMUTEXRELEASE
-	  case 3:
-		  notImplemented(instructionCode);
-		  break;
+	//SETMUTEXID
+	case 6:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTSKIPBACKWARD
-	  case 4:
-		  notImplemented(instructionCode);
-		  break;
+	//SETCUELISTSUBMASTERVALUE
+	case 7:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTSKIPBACKWARD
-	  case 5:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTCOPY
+	case 8:
+		notImplemented(instructionCode);
+		break;
 
-	  //SETMUTEXID
-	  case 6:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTPASTE
+	case 9:
+		notImplemented(instructionCode);
+		break;
 
-	  //SETCUELISTSUBMASTERVALUE
-	  case 7:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTSETNAME
+	case 10:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTCOPY
-	  case 8:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTSTART
+	case 11:
+		int index = readNum(offset);
+		CuelistStart(index);
+		break;
 
-	  //CUELISTPASTE
-	  case 9:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTPAUSE
+	case 12:
+		int index = readNum(offset);
+		CuelistPause(index);
+		break;
 
-	  //CUELISTSETNAME
-	  case 10:
-		  notImplemented(instructionCode);
-		  break;
+	//CUELISTSTOP
+	case 13:
+		int index = readNum(offset);
+		CuelistStop(index);
+		break;
 
-	  //CUELISTSTART
-	  case 11:
-	      int index = readNum(offset);
-		  CuelistStart(index)
-		  break;
+	//CUELISTSTOPALL
+	case 14:
+		int index = readNum(offset);
+		CuelistStopAll(index);
+		break;
 
-	  //CUELISTPAUSE
-	  case 12:
-		  int index = readNum(offset);
-		  CuelistPause(index)
-		  break;
+	//CUELISTSETPROPERTY
+	case 15:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTSTOP
-	  case 13:
-		  int index = readNum(offset);
-          CuelistStop(index)
-		  break;
+	//CUESETPROPERTY
+	case 16:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTSTOPALL
-	  case 14:
-		  int index = readNum(offset);
-          CuelistStopAll(index)
-		  break;
+	//DELETECUE
+	case 17:
+		notImplemented(instructionCode);
+		break;
 
-	  //CUELISTSETPROPERTY
-	  case 15:
-		  notImplemented(instructionCode);
-		  break;
+	//GOTOCUE
+	case 18:
+		int cuelist = readNum(offset);
+		int cue = readNum(offset);
+		int jump = readNum(offset);
+		CuelistGotoCue(cuelist, cue, jump);
+		break;
 
-	  //CUESETPROPERTY
-	  case 16:
-		  notImplemented(instructionCode);
-		  break;
+	//SETCUENAME
+	case 19:
+		notImplemented(instructionCode);
+		break;
 
-	  //DELETECUE
-	  case 17:
-		  notImplemented(instructionCode);
-		  break;
+	//RECORDCUE
+	case 20:
+		notImplemented(instructionCode);
+		break;
 
-	  //GOTOCUE
-	  case 18:
-	      int cuelist = readNum(offset);
-	      int cue = readNum(offset);
-	      int jump = readNum(offset);
-		  CuelistGotoCue(cuelist, cue, jump)
-		  break;
+	//SETLEVEL
+	case 21:
+		notImplemented(instructionCode);
+		break;
 
-	  //SETCUENAME
-	  case 19:
-		  notImplemented(instructionCode);
-		  break;
+	//SETRGBW
+	case 22:
+		setRgbw();
+		break;
 
-	  //RECORDCUE
-	  case 20:
-		  notImplemented(instructionCode);
-		  break;
+	//PROCLEAR
+	case 23:
+		proClear();
+		break;
 
-	  //SETLEVEL
-	  case 21:
-		  notImplemented(instructionCode);
-		  break;
+	//GRPUSE
+	case 24:
+		readString(offset);
+		string groupName = sArg;
+		int expand = readNum(offset);
+		grpUse(groupName, expand);
+		break;
 
-	  //SETRGBW
-	  case 22:
-		  setRgbw();
-		  break;
+	//GRPCREATE
+	case 25:
+		notImplemented(instructionCode);
+		break;
 
-	  //PROCLEAR
-	  case 23:
-		  proClear();
-		  break;
+	//SETSWITCHSTATE
+	case 26:
+		notImplemented(instructionCode);
+		break;
 
-	  //GRPUSE
-	  case 24:
-	  	readString(offset);
-	  	string groupName = sArg;
-	  	int expand = readNum(offset);
-	  	grpUse(groupName, expand);
-	  	break;
+	//VMSETLEVEL
+	case 27:
+		int index = readNum(offset);
+		int level = readNum(offset);
+		VersatileMasterStartAutoFade(index, level, 200);
+		break;
 
-	  //GRPCREATE
-	  case 25:
-		  notImplemented(instructionCode);
-		  break;
+	//MEDIACONTINUE
+	case 28:
+		notImplemented(instructionCode);
+		break;
 
-	  //SETSWITCHSTATE
-	  case 26:
-		  notImplemented(instructionCode);
-		  break;
+	//MEDIAPAUSE
+	case 29:
+		notImplemented(instructionCode);
+		break;
 
-	  //VMSETLEVEL
-	  case 27:
-		  int index=readNum(offset);
-		  int level = readNum(offset);
-		  VersatileMasterStartAutoFade(index, level, 200);
-		  break;
+	//MEDIAPLAY
+	case 30:
+		notImplemented(instructionCode);
+		break;
 
-	  //MEDIACONTINUE
-	  case 28:
-		  notImplemented(instructionCode);
-		  break;
+	//MEDIASETVOLUME
+	case 31:
+		notImplemented(instructionCode);
+		break;
 
-	  //MEDIAPAUSE
-	  case 29:
-		  notImplemented(instructionCode);
-		  break;
+	//MEDIASTOP
+	case 32:
+		notImplemented(instructionCode);
+		break;
 
-	  //MEDIAPLAY
-	  case 30:
-		  notImplemented(instructionCode);
-		  break;
+	//GETCUELISTS
+	case 33:
+		notImplemented(instructionCode);
+		//Call("actionResponder", instructionCode);
+		break;
 
-	  //MEDIASETVOLUME
-	  case 31:
-		  notImplemented(instructionCode);
-		  break;
+	//GETSTATE
+	case 34:
+		//Call("actionResponder", instructionCode);
+		notImplemented(instructionCode);
+		break;
 
-	  //MEDIASTOP
-	  case 32:
-		  notImplemented(instructionCode);
-		  break;
-
-      //GETCUELISTS
-      case 33:
-          notImplemented(instructionCode);
-          //Call("actionResponder", instructionCode);
-          break;
-
-      //GETSTATE
-      case 34:
-          //Call("actionResponder", instructionCode);
-          notImplemented(instructionCode);
-          break;
+	//CUESETFADETIME
+	case 35:
+		int cuelistIndex = readNum(offset);
+		int cueIndex = readNum(offset);
+		int fadeTime = readNum(offset);
+		CueSetProperty(cuelistIndex, cueIndex, "InFadeTime", fadeTime);
+		break;
 	}
 }
-function setRgbw(){
-  int redRaw = readNum(offset);
-  //printf("red: %d\n", redRaw);
-  int redLevel = to24Bit(redRaw);
-  SetPosition(redLevel);
-  proLoadValue(2);
 
+function setRgbw()
+{
+	int redRaw = readNum(offset);
+	//printf("red: %d\n", redRaw);
+	int redLevel = to24Bit(redRaw);
+	SetPosition(redLevel);
+	proLoadValue(2);
 
-  int greenRaw = readNum(offset);
-  //printf("green: %d\n", greenRaw);
-  int greenLevel = to24Bit(greenRaw);
-  SetPosition(greenLevel);
-  proLoadValue(1);
+	int greenRaw = readNum(offset);
+	//printf("green: %d\n", greenRaw);
+	int greenLevel = to24Bit(greenRaw);
+	SetPosition(greenLevel);
+	proLoadValue(1);
 
-  int blueRaw = readNum(offset);
-  //printf("blue: %d\n", blueRaw);
-  int blueLevel = to24Bit(blueRaw);
-  SetPosition(blueLevel);
-  proLoadValue(0);
+	int blueRaw = readNum(offset);
+	//printf("blue: %d\n", blueRaw);
+	int blueLevel = to24Bit(blueRaw);
+	SetPosition(blueLevel);
+	proLoadValue(0);
 
-  int whiteRaw = readNum(offset);
-  //printf("white: %d\n", whiteRaw);
-  int whiteLevel = to24Bit(whiteRaw);
-  SetPosition(whiteLevel);
-  proLoadValue(3);
-  //printf("setRGBW Complete");
+	int whiteRaw = readNum(offset);
+	//printf("white: %d\n", whiteRaw);
+	int whiteLevel = to24Bit(whiteRaw);
+	SetPosition(whiteLevel);
+	proLoadValue(3);
+	//printf("setRGBW Complete");
 }
 
-function notImplemented(int instructionCode){
+function notImplemented(int instructionCode)
+{
 
 	alert("Action not implemented: %s\n", actions[instructionCode]);
 }
 
-function to24Bit(int value){
-  return ((value+1) *256)-1;
+function to24Bit(int value)
+{
+	return ((value + 1) * 256) - 1;
 }
 
-function createActionTable(){
+function createActionTable()
+{
 	actions[0] = "EOF";
 	actions[1] = "PACKETID";
 	actions[2] = "CUELISTDELETEALLCUES";
@@ -331,6 +374,7 @@ function createActionTable(){
 	actions[32] = "MEDIASTOP";
 	actions[33] = "GETCUELISTS";
 	actions[34] = "GETSHOWSTATE";
+	actions[35] = "CUESETFADETIME";
 }
 
 RegisterEvent(UdpReceive, OnUdp);

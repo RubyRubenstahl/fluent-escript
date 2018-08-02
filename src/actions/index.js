@@ -2,7 +2,7 @@ const { tokenizeInstruction } = require("../lib");
 
 const createScript = function(name) {
   this.actions = [];
-  this.name=name;
+  this.name = name;
   return this;
 };
 
@@ -47,6 +47,22 @@ createScript.prototype.cuelistStop = function(cuelistIndex) {
     {
       command: "CUELISTSTOP",
       params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.cueSetFadeTime = function(
+  cuelistIndex,
+  cueIndex,
+  fadeTime
+) {
+  this.pushAction(
+    "cueSetFadeTime",
+    { cuelistIndex, cueIndex, fadeTime },
+    {
+      command: "CUESETFADETIME",
+      params: [cuelistIndex, cueIndex, fadeTime]
     }
   );
   return this;
@@ -410,4 +426,4 @@ createScript.prototype.mediaStop = function(playerIndex) {
   return this;
 }; */
 
-module.exports = (name)=> new createScript(name);
+module.exports = name => new createScript(name);
