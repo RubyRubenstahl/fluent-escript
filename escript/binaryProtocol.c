@@ -248,7 +248,8 @@ function runAction(int instructionCode)
 	case 27:
 		int index = readNum(offset);
 		int level = readNum(offset);
-		VersatileMasterStartAutoFade(index, level, 200);
+		int fadeTime = readNum(offset);
+		VersatileMasterStartAutoFade(index, level, fadeTime);
 		break;
 
 	//MEDIACONTINUE

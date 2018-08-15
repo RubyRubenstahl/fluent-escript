@@ -327,13 +327,13 @@ createScript.prototype.grpCreate = function(name, selectedOnly = true) {
   return this;
 }; */
 
-createScript.prototype.vmSetLevel = function(vmIndex, value) {
+createScript.prototype.vmSetLevel = function(vmIndex, value, fadeTime = 100) {
   this.pushAction(
     "vmSetLevel",
     { vmIndex, value },
     {
       command: "VMSETLEVEL",
-      params: [vmIndex, value]
+      params: [vmIndex, value, fadeTime]
     }
   );
   return this;
