@@ -225,7 +225,11 @@ function runAction(int instructionCode)
 
 	//SETCUENAME
 	case 19:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		int cueIndex = readNum(offset);
+		readString(offset);
+		string name = sArg;
+		result = CueSetName(cuelistIndex, cueIndex, name);
 		break;
 
 	//RECORDCUE
