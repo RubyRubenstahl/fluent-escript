@@ -208,7 +208,11 @@ function runAction(int instructionCode)
 
 	//CUELISTSETPROPERTY
 	case 15:
-		notImplemented(instructionCode);
+		int index = readNum(offset);
+		readString(offset);
+		string propertyName = sArg;
+		int propertyValue = readNum(offset);
+		result = CuelistSetProperty(index, propertyName, propertyValue);
 		break;
 
 	//CUESETPROPERTY

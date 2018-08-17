@@ -200,16 +200,21 @@ createScript.prototype.stopAll = function() {
   return this;
 };
 
-/* createScript.prototype.xxxx = function(){
+createScript.prototype.cuelistSetProperty = function(
+  cuelistIndex,
+  propertyName,
+  value
+) {
   this.pushAction(
-  ',
-  {(,
+    "cuelistSetProperty",
+    { cuelistIndex, propertyName, value },
   {
     command: "CUELISTSETPROPERTY",
-    params: []
-  });
+      params: [cuelistIndex, propertyName, value]
+    }
+  );
   return this;
-}; */
+};
 
 /* createScript.prototype.xxxx = function(){
   this.pushAction(
