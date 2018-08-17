@@ -170,7 +170,7 @@ createScript.prototype.cuelistSetName = function(cuelistIndex, name) {
     { cuelistIndex, name },
     {
       command: "CUELISTSETNAME",
-      params: []
+      params: [cuelistIndex, name]
     }
   );
   return this;
