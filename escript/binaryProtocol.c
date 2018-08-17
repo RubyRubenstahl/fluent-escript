@@ -154,7 +154,9 @@ function runAction(int instructionCode)
 
 	//SETCUELISTSUBMASTERVALUE
 	case 7:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		int level = readNum(offset);
+		result = CuelistSubMasterSetValue(cuelistIndex, level);
 		break;
 
 	//CUELISTCOPY
