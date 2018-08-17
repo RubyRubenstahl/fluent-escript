@@ -15,6 +15,7 @@ int result;
 int debug = 0;
 int packetId = 0;
 int SUCCESS = 1;
+int error;
 createActionTable();
 int instructionIndex = 0;
 function OnUdp(int nDriverHandle)
@@ -61,12 +62,13 @@ function processNextInstruction()
 			if (debug)
 			{
 				printf("Instruction Code: %d\n", instruction);
-			}
-			if (debug)
-			{
 				printf("Action: %s\n", action);
 			}
-			runAction(instruction);
+			error = runAction(instruction);
+			if (error)
+			{
+				alert("BCP Instruction Failed\n  code: %d\n  instructionINdex: %d\n  action: %s\n", instruction, instructionIndex, action);
+			}
 		}
 		if (debug)
 		{
@@ -76,9 +78,6 @@ function processNextInstruction()
 	if (debug)
 	{
 		printf("Packet completed - Final offset: %d\n", offset);
-	}
-	if (debug)
-	{
 		printf("\n\n\n");
 	}
 	instructionIndex++;
