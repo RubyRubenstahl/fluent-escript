@@ -116,7 +116,14 @@ function runAction(int instructionCode)
 
 	//CUELISTDELETEALLCUES
 	case 2:
-		notImplemented(instructionCode);
+		int index = readNum(offset);
+		int cueCount = CueGetCount(index);
+		int i;
+		for (i; i < cueCount; i++)
+		{
+			CueDelete(index, 0);
+		}
+		result = SUCCESS;
 		break;
 
 	//CUELISTMUTEXRELEASE
