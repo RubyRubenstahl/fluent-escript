@@ -134,12 +134,14 @@ function runAction(int instructionCode)
 
 	//CUELISTSKIPBACKWARD
 	case 4:
-		notImplemented(instructionCode);
+		int index = readNum(offset);
+		result = CuelistSkipBackward(index);
 		break;
 
 	//CUELISTSKIPFORWARD
 	case 5:
-		notImplemented(instructionCode);
+		int index = readNum(offset);
+		result = CuelistSkipForward(index);
 		break;
 
 	//SETMUTEXID
