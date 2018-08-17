@@ -341,10 +341,29 @@ function runAction(int instructionCode)
 		int fadeTime = readNum(offset);
 		CueSetProperty(cuelistIndex, cueIndex, "InFadeTime", fadeTime);
 		break;
+	//SETRGB
+	case 36:
+		setRgb();
+		result = SUCCESS;
+		break;
+
+		return result;
 	}
 }
 
 function setRgbw()
+{
+	setRgb();
+
+	int whiteRaw = readNum(offset);
+	//printf("white: %d\n", whiteRaw);
+	int whiteLevel = to24Bit(whiteRaw);
+	SetPosition(whiteLevel);
+	proLoadValue(3);
+	//printf("setRGBW Complete");
+}
+
+function setRgb()
 {
 	int redRaw = readNum(offset);
 	//printf("red: %d\n", redRaw);
@@ -363,13 +382,6 @@ function setRgbw()
 	int blueLevel = to24Bit(blueRaw);
 	SetPosition(blueLevel);
 	proLoadValue(0);
-
-	int whiteRaw = readNum(offset);
-	//printf("white: %d\n", whiteRaw);
-	int whiteLevel = to24Bit(whiteRaw);
-	SetPosition(whiteLevel);
-	proLoadValue(3);
-	//printf("setRGBW Complete");
 }
 
 function notImplemented(int instructionCode)

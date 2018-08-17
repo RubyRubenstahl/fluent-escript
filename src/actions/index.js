@@ -263,6 +263,18 @@ createScript.prototype.cueRecord = function(cuelistIndex, name) {
   return this;
 };
 
+createScript.prototype.fixtureSetRgb = function(r, g, b) {
+  this.pushAction(
+    "fixtureSetRgb",
+    { r, g, b },
+    {
+      command: "SETRGB",
+      params: [r, g, b]
+    }
+  );
+  return this;
+};
+
 /* createScript.prototype.xxxx = function(){
   this.pushAction(
   ',
