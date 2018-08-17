@@ -202,8 +202,7 @@ function runAction(int instructionCode)
 
 	//CUELISTSTOPALL
 	case 14:
-		int index = readNum(offset);
-		CuelistStopAll(index);
+		CuelistStopAll();
 		result = SUCCESS;
 		break;
 
