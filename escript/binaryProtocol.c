@@ -262,7 +262,11 @@ function runAction(int instructionCode)
 
 	//SETLEVEL
 	case 21:
-		notImplemented(instructionCode);
+		int level = readNum(offset);
+		int level24 = to24Bit(level);
+		SetPosition(level24);
+		proLoadValue(0);
+		result = SUCCESS;
 		break;
 
 	//SETRGBW
