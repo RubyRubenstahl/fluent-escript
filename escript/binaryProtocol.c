@@ -12,6 +12,7 @@ int packetComplete = 0;
 string action;
 string actions[100];
 int debug = 0;
+int packetId = 0;
 createActionTable();
 
 function OnUdp(int nDriverHandle)
@@ -106,7 +107,7 @@ function runAction(int instructionCode)
 	{
 	//PACKETID
 	case 1:
-		notImplemented(instructionCode);
+		packetId = readNum(offset);
 		break;
 
 	//CUELISTDELETEALLCUES
