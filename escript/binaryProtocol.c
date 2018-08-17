@@ -443,6 +443,7 @@ function createActionTable()
 	actions[33] = "GETCUELISTS";
 	actions[34] = "GETSHOWSTATE";
 	actions[35] = "CUESETFADETIME";
+	actions[36] = "SETRGB";
 }
 
 RegisterEvent(UdpReceive, OnUdp);
