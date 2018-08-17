@@ -128,7 +128,8 @@ function runAction(int instructionCode)
 
 	//CUELISTMUTEXRELEASE
 	case 3:
-		notImplemented(instructionCode);
+		int mutexId = readNum(offset);
+		result = MutexRelease(mutexId);
 		break;
 
 	//CUELISTSKIPBACKWARD
@@ -216,7 +217,9 @@ function runAction(int instructionCode)
 
 	//DELETECUE
 	case 17:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		int cueIndex = readNum(offset);
+		result = CueDelete(cuelistIndex, cueIndex);
 		break;
 
 	//GOTOCUE
