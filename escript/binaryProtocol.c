@@ -234,7 +234,12 @@ function runAction(int instructionCode)
 
 	//RECORDCUE
 	case 20:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		readString(offset);
+		string name = sArg;
+		RecordCue(cuelistIndex, name);
+		// Ingnore the failure from RecordCue when stage is empty on record
+		result = SUCCESS;
 		break;
 
 	//SETLEVEL
