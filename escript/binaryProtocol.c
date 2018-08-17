@@ -112,6 +112,7 @@ function runAction(int instructionCode)
 	//PACKETID
 	case 1:
 		packetId = readNum(offset);
+		result = SUCCESS;
 		break;
 
 	//CUELISTDELETEALLCUES
