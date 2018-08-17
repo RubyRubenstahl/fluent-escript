@@ -281,6 +281,17 @@ createScript.prototype.fixtureSetRgb = function(r, g, b) {
   return this;
 };
 
+createScript.prototype.fixtureSetLevel = function(level) {
+  this.pushAction(
+    "fixtureSetLevel",
+    { level },
+    {
+      command: "SETLEVEL",
+      params: [level]
+    }
+  );
+  return this;
+};
 /* createScript.prototype.xxxx = function(){
   this.pushAction(
   ',
