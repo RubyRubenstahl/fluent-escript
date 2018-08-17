@@ -385,7 +385,7 @@ function createActionTable()
 	actions[2] = "CUELISTDELETEALLCUES";
 	actions[3] = "CUELISTMUTEXRELEASE";
 	actions[4] = "CUELISTSKIPBACKWARD";
-	actions[5] = "CUELISTSKIPBACKWARD";
+	actions[5] = "CUELISTSKIPFORWARD";
 	actions[6] = "SETMUTEXID";
 	actions[7] = "SETCUELISTSUBMASTERVALUE";
 	actions[8] = "CUELISTCOPY";
