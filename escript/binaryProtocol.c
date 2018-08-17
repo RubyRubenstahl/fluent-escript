@@ -106,7 +106,7 @@ function readString(int readOffset)
 
 function runAction(int instructionCode)
 {
-	int result;
+	int result = -1;
 	switch (instructionCode)
 	{
 	//PACKETID
