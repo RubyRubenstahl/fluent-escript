@@ -11,6 +11,7 @@ int offset = 0;
 int packetComplete = 0;
 string action;
 string actions[100];
+int result;
 int debug = 0;
 int packetId = 0;
 createActionTable();
