@@ -155,12 +155,16 @@ function runAction(int instructionCode)
 
 	//CUELISTCOPY
 	case 8:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		result = CuelistCopy(cuelistIndex);
+		return result;
 		break;
 
 	//CUELISTPASTE
 	case 9:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		result = CuelistPaste(cuelistIndex);
+		return result;
 		break;
 
 	//CUELISTSETNAME
