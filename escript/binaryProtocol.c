@@ -175,24 +175,29 @@ function runAction(int instructionCode)
 	case 11:
 		int index = readNum(offset);
 		CuelistStart(index);
+		result = SUCCESS;
 		break;
 
 	//CUELISTPAUSE
 	case 12:
 		int index = readNum(offset);
+		result = SUCCESS;
 		CuelistPause(index);
+		result = SUCCESS;
 		break;
 
 	//CUELISTSTOP
 	case 13:
 		int index = readNum(offset);
 		CuelistStop(index);
+		result = SUCCESS;
 		break;
 
 	//CUELISTSTOPALL
 	case 14:
 		int index = readNum(offset);
 		CuelistStopAll(index);
+		result = SUCCESS;
 		break;
 
 	//CUELISTSETPROPERTY
@@ -215,7 +220,7 @@ function runAction(int instructionCode)
 		int cuelist = readNum(offset);
 		int cue = readNum(offset);
 		int jump = readNum(offset);
-		CuelistGotoCue(cuelist, cue, jump);
+		result = CuelistGotoCue(cuelist, cue, jump);
 		break;
 
 	//SETCUENAME
@@ -236,11 +241,13 @@ function runAction(int instructionCode)
 	//SETRGBW
 	case 22:
 		setRgbw();
+		result = SUCCESS;
 		break;
 
 	//PROCLEAR
 	case 23:
 		proClear();
+		result = SUCCESS;
 		break;
 
 	//GRPUSE
@@ -248,7 +255,7 @@ function runAction(int instructionCode)
 		readString(offset);
 		string groupName = sArg;
 		int expand = readNum(offset);
-		grpUse(groupName, expand);
+		result = grpUse(groupName, expand);
 		break;
 
 	//GRPCREATE
