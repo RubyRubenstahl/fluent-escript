@@ -16,7 +16,7 @@ int debug = 0;
 int packetId = 0;
 int SUCCESS = 1;
 createActionTable();
-
+int instructionIndex = 0;
 function OnUdp(int nDriverHandle)
 {
 	BobSetRange(nBob, 0, BobGetSize(nBob), 0);
@@ -29,7 +29,9 @@ function OnUdp(int nDriverHandle)
 		return;
 	}
 	//startNewResponse();
+	instructionIndex = 0;
 	processNextInstruction();
+
 	//endResponse();
 	//sendResponse();
 }
@@ -79,6 +81,7 @@ function processNextInstruction()
 	{
 		printf("\n\n\n");
 	}
+	instructionIndex++;
 }
 
 function readNum(int readOffset)
