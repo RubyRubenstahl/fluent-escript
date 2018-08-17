@@ -191,7 +191,6 @@ function runAction(int instructionCode)
 	//CUELISTPAUSE
 	case 12:
 		int index = readNum(offset);
-		result = SUCCESS;
 		CuelistPause(index);
 		result = SUCCESS;
 		break;
@@ -353,6 +352,7 @@ function runAction(int instructionCode)
 		int fadeTime = readNum(offset);
 		CueSetProperty(cuelistIndex, cueIndex, "InFadeTime", fadeTime);
 		break;
+
 	//SETRGB
 	case 36:
 		setRgb();
