@@ -124,7 +124,7 @@ function runAction(int instructionCode)
 		notImplemented(instructionCode);
 		break;
 
-	//CUELISTSKIPBACKWARD
+	//CUELISTSKIPFORWARD
 	case 5:
 		notImplemented(instructionCode);
 		break;
