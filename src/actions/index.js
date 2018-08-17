@@ -216,16 +216,22 @@ createScript.prototype.cuelistSetProperty = function(
   return this;
 };
 
-/* createScript.prototype.xxxx = function(){
+createScript.prototype.cueSetProperty = function(
+  cuelistIndex,
+  cueIndex,
+  propertyName,
+  value
+) {
   this.pushAction(
-  ',
-  {(,
+    "cueSetProperty",
+    { cuelistIndex, cueIndex, propertyName, value },
   {
     command: "CUESETPROPERTY",
-    params: []
-  });
+      params: [cuelistIndex, cueIndex, propertyName, value]
+    }
+  );
   return this;
-}; */
+};
 
 createScript.prototype.cueDelete = function(cuelistIndex, cueIndex) {
   this.pushAction(

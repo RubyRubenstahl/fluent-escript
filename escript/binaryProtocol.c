@@ -218,7 +218,12 @@ function runAction(int instructionCode)
 
 	//CUESETPROPERTY
 	case 16:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		int cueIndex = readNum(offset);
+		readString(offset);
+		string propertyName = sArg;
+		int propertyValue = readNum(offset);
+		result = CueSetProperty(cuelistIndex, cueIndex, propertyName, propertyValue);
 		break;
 
 	//DELETECUE
