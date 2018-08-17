@@ -14,6 +14,7 @@ string actions[100];
 int result;
 int debug = 0;
 int packetId = 0;
+int SUCCESS = 1;
 createActionTable();
 
 function OnUdp(int nDriverHandle)
