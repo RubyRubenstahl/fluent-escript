@@ -165,7 +165,10 @@ function runAction(int instructionCode)
 
 	//CUELISTSETNAME
 	case 10:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		readString(offset);
+		string name = sArg;
+		result = CuelistSetName(cuelistIndex, name);
 		break;
 
 	//CUELISTSTART
