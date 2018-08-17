@@ -34,5 +34,6 @@ module.exports = {
   MEDIASTOP: 32,
   GETCUELISTS: 33,
   GETSHOWSTATE: 34,
+  CUESETFADETIME: 35,
   SETRGB: 36
 };
