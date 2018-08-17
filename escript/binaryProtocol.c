@@ -143,7 +143,9 @@ function runAction(int instructionCode)
 
 	//SETMUTEXID
 	case 6:
-		notImplemented(instructionCode);
+		int cuelistIndex = readNum(offset);
+		int mutexId = readNum(offset);
+		result = CuelistSetMutexId(cuelistIndex, mutexId);
 		break;
 
 	//SETCUELISTSUBMASTERVALUE
