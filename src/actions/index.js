@@ -208,8 +208,8 @@ createScript.prototype.cuelistSetProperty = function(
   this.pushAction(
     "cuelistSetProperty",
     { cuelistIndex, propertyName, value },
-  {
-    command: "CUELISTSETPROPERTY",
+    {
+      command: "CUELISTSETPROPERTY",
       params: [cuelistIndex, propertyName, value]
     }
   );
@@ -225,8 +225,8 @@ createScript.prototype.cueSetProperty = function(
   this.pushAction(
     "cueSetProperty",
     { cuelistIndex, cueIndex, propertyName, value },
-  {
-    command: "CUESETPROPERTY",
+    {
+      command: "CUESETPROPERTY",
       params: [cuelistIndex, cueIndex, propertyName, value]
     }
   );
@@ -292,6 +292,7 @@ createScript.prototype.fixtureSetLevel = function(level) {
   );
   return this;
 };
+
 /* createScript.prototype.xxxx = function(){
   this.pushAction(
   ',
