@@ -359,8 +359,18 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break;
 
+	
+	//RESETCUELIST
+	case 37:
+		int index = readNum(offset);
+		CuelistDeleteAllCues(index);
+		result = SUCCESS;
+		break;
+	
 		return result;
 	}
+
+	
 }
 
 function setRgbw()
@@ -446,6 +456,7 @@ function createActionTable()
 	actions[34] = "GETSHOWSTATE";
 	actions[35] = "CUESETFADETIME";
 	actions[36] = "SETRGB";
+	actions[37] = "RESETCUELIST"
 }
 
 RegisterEvent(UdpReceive, OnUdp);

@@ -1,13 +1,13 @@
 const { tokenizeInstruction } = require("../lib");
 
-const createScript = function(name) {
+const createScript = function (name) {
   this.actions = [];
   this.name = name;
   return this;
 };
 
 // Tokenize the instruction and push the action onto the action list.
-createScript.prototype.pushAction = function(name, arguments, instructions) {
+createScript.prototype.pushAction = function (name, arguments, instructions) {
   this.actions.push({
     name,
     arguments,
@@ -16,7 +16,7 @@ createScript.prototype.pushAction = function(name, arguments, instructions) {
   });
 };
 
-createScript.prototype.cuelistPlay = function(cuelistIndex) {
+createScript.prototype.cuelistPlay = function (cuelistIndex) {
   this.pushAction(
     "cuelistPlay",
     { cuelistIndex },
@@ -28,7 +28,7 @@ createScript.prototype.cuelistPlay = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
+createScript.prototype.cuePlay = function (cuelistIndex, cueIndex, jump = true) {
   this.pushAction(
     "cuePlay",
     { cuelistIndex, cueIndex, jump },
@@ -40,7 +40,7 @@ createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
   return this;
 };
 
-createScript.prototype.cuelistStop = function(cuelistIndex) {
+createScript.prototype.cuelistStop = function (cuelistIndex) {
   this.pushAction(
     "cuelistStop",
     { cuelistIndex },
@@ -52,7 +52,7 @@ createScript.prototype.cuelistStop = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cueSetFadeTime = function(
+createScript.prototype.cueSetFadeTime = function (
   cuelistIndex,
   cueIndex,
   fadeTime
@@ -68,7 +68,7 @@ createScript.prototype.cueSetFadeTime = function(
   return this;
 };
 
-createScript.prototype.cuelistDeleteAllCues = function(cuelistIndex) {
+createScript.prototype.cuelistDeleteAllCues = function (cuelistIndex) {
   this.pushAction(
     "cuelistDeleteAllCues",
     { cuelistIndex },
@@ -80,7 +80,23 @@ createScript.prototype.cuelistDeleteAllCues = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.mutexGroupStop = function(mutexId) {
+
+createScript.prototype.resetCuelist = function (cuelistIndex) {
+  this.pushAction(
+    "resetCuelist",
+    { cuelistIndex },
+    {
+      command: "RESETCUELIST",
+      params: [cuelistIndex]
+    }
+  );
+  return this;
+};
+
+
+
+
+createScript.prototype.mutexGroupStop = function (mutexId) {
   this.pushAction(
     "mutexGroupStop",
     { mutexId },
@@ -92,7 +108,7 @@ createScript.prototype.mutexGroupStop = function(mutexId) {
   return this;
 };
 
-createScript.prototype.cuelistSkipBack = function(cuelistIndex) {
+createScript.prototype.cuelistSkipBack = function (cuelistIndex) {
   this.pushAction(
     "cuelistSkipBack",
     { cuelistIndex },
@@ -104,7 +120,7 @@ createScript.prototype.cuelistSkipBack = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cuelistSkipForward = function(cuelistIndex) {
+createScript.prototype.cuelistSkipForward = function (cuelistIndex) {
   this.pushAction(
     "cuelistSkipForward",
     { cuelistIndex },
@@ -116,7 +132,7 @@ createScript.prototype.cuelistSkipForward = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cuelistSetMutexId = function(cuelistIndex, mutexId) {
+createScript.prototype.cuelistSetMutexId = function (cuelistIndex, mutexId) {
   this.pushAction(
     "cuelistSetMutexId",
     { cuelistIndex, mutexId },
@@ -128,7 +144,10 @@ createScript.prototype.cuelistSetMutexId = function(cuelistIndex, mutexId) {
   return this;
 };
 
-createScript.prototype.setSubmasterValue = function(cuelistIndex, value) {
+
+
+
+createScript.prototype.setSubmasterValue = function (cuelistIndex, value) {
   this.pushAction(
     "setSubmasterValue",
     { cuelistIndex, value },
@@ -140,7 +159,7 @@ createScript.prototype.setSubmasterValue = function(cuelistIndex, value) {
   return this;
 };
 
-createScript.prototype.cuelistCopy = function(cuelistIndex) {
+createScript.prototype.cuelistCopy = function (cuelistIndex) {
   this.pushAction(
     "cuelistCopy",
     { cuelistIndex },
@@ -152,7 +171,7 @@ createScript.prototype.cuelistCopy = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cuelistPaste = function(cuelistIndex) {
+createScript.prototype.cuelistPaste = function (cuelistIndex) {
   this.pushAction(
     "cuelistPaste",
     { cuelistIndex },
@@ -164,7 +183,7 @@ createScript.prototype.cuelistPaste = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.cuelistSetName = function(cuelistIndex, name) {
+createScript.prototype.cuelistSetName = function (cuelistIndex, name) {
   this.pushAction(
     "cuelistSetName",
     { cuelistIndex, name },
@@ -176,7 +195,7 @@ createScript.prototype.cuelistSetName = function(cuelistIndex, name) {
   return this;
 };
 
-createScript.prototype.cuelistPause = function(cuelistIndex) {
+createScript.prototype.cuelistPause = function (cuelistIndex) {
   this.pushAction(
     "cuelistPause",
     { cuelistIndex },
@@ -188,7 +207,7 @@ createScript.prototype.cuelistPause = function(cuelistIndex) {
   return this;
 };
 
-createScript.prototype.stopAll = function() {
+createScript.prototype.stopAll = function () {
   this.pushAction(
     "stopAll",
     {},
@@ -200,7 +219,13 @@ createScript.prototype.stopAll = function() {
   return this;
 };
 
-createScript.prototype.cuelistSetProperty = function(
+
+createScript.prototype.cuelistSetVmId = function (cuelistIndex, vmId) {
+  return this.cuelistSetProperty(cuelistIndex, 'ExtraSubMaster', vmId);
+};
+
+
+createScript.prototype.cuelistSetProperty = function (
   cuelistIndex,
   propertyName,
   value
@@ -216,7 +241,7 @@ createScript.prototype.cuelistSetProperty = function(
   return this;
 };
 
-createScript.prototype.cueSetProperty = function(
+createScript.prototype.cueSetProperty = function (
   cuelistIndex,
   cueIndex,
   propertyName,
@@ -233,7 +258,7 @@ createScript.prototype.cueSetProperty = function(
   return this;
 };
 
-createScript.prototype.cueDelete = function(cuelistIndex, cueIndex) {
+createScript.prototype.cueDelete = function (cuelistIndex, cueIndex) {
   this.pushAction(
     "cueDelete",
     { cuelistIndex, cueIndex },
@@ -245,7 +270,7 @@ createScript.prototype.cueDelete = function(cuelistIndex, cueIndex) {
   return this;
 };
 
-createScript.prototype.cueSetName = function(cuelistIndex, cueIndex, name) {
+createScript.prototype.cueSetName = function (cuelistIndex, cueIndex, name) {
   this.pushAction(
     "cueSetName",
     { cuelistIndex, cueIndex, name },
@@ -257,7 +282,7 @@ createScript.prototype.cueSetName = function(cuelistIndex, cueIndex, name) {
   return this;
 };
 
-createScript.prototype.cueRecord = function(cuelistIndex, name) {
+createScript.prototype.cueRecord = function (cuelistIndex, name) {
   this.pushAction(
     "cueRecord",
     { cuelistIndex, name },
@@ -269,7 +294,7 @@ createScript.prototype.cueRecord = function(cuelistIndex, name) {
   return this;
 };
 
-createScript.prototype.fixtureSetRgb = function(r, g, b) {
+createScript.prototype.fixtureSetRgb = function (r, g, b) {
   this.pushAction(
     "fixtureSetRgb",
     { r, g, b },
@@ -281,7 +306,7 @@ createScript.prototype.fixtureSetRgb = function(r, g, b) {
   return this;
 };
 
-createScript.prototype.fixtureSetLevel = function(level) {
+createScript.prototype.fixtureSetLevel = function (level) {
   this.pushAction(
     "fixtureSetLevel",
     { level },
@@ -315,7 +340,7 @@ createScript.prototype.fixtureSetLevel = function(level) {
   return this;
 }; */
 
-createScript.prototype.proClear = function() {
+createScript.prototype.proClear = function () {
   this.pushAction(
     "proClear",
     {},
@@ -327,7 +352,7 @@ createScript.prototype.proClear = function() {
   return this;
 };
 
-createScript.prototype.grpUse = function(groupName, expand = false) {
+createScript.prototype.grpUse = function (groupName, expand = false) {
   this.pushAction(
     "grpUse",
     { groupName, expand },
@@ -339,7 +364,7 @@ createScript.prototype.grpUse = function(groupName, expand = false) {
   return this;
 };
 
-createScript.prototype.grpCreate = function(name, selectedOnly = true) {
+createScript.prototype.grpCreate = function (name, selectedOnly = true) {
   this.pushAction(
     "grpCreate",
     { name, selectedOnly },
@@ -362,7 +387,7 @@ createScript.prototype.grpCreate = function(name, selectedOnly = true) {
   return this;
 }; */
 
-createScript.prototype.vmSetLevel = function(vmIndex, value, fadeTime = 100) {
+createScript.prototype.vmSetLevel = function (vmIndex, value, fadeTime = 100) {
   this.pushAction(
     "vmSetLevel",
     { vmIndex, value },
@@ -374,7 +399,7 @@ createScript.prototype.vmSetLevel = function(vmIndex, value, fadeTime = 100) {
   return this;
 };
 
-createScript.prototype.mediaContinue = function(playerIndex) {
+createScript.prototype.mediaContinue = function (playerIndex) {
   this.pushAction(
     "mediaContinue",
     { playerIndex },
@@ -386,7 +411,7 @@ createScript.prototype.mediaContinue = function(playerIndex) {
   return this;
 };
 
-createScript.prototype.mediaPause = function(playerIndex) {
+createScript.prototype.mediaPause = function (playerIndex) {
   this.pushAction(
     "mediaPause",
     { playerIndex },
@@ -398,7 +423,7 @@ createScript.prototype.mediaPause = function(playerIndex) {
   return this;
 };
 
-createScript.prototype.mediaPlay = function(
+createScript.prototype.mediaPlay = function (
   playerIndex,
   filePath,
   repeat = true,
@@ -415,7 +440,7 @@ createScript.prototype.mediaPlay = function(
   return this;
 };
 
-createScript.prototype.mediaSetVolume = function(playerIndex, value) {
+createScript.prototype.mediaSetVolume = function (playerIndex, value) {
   this.pushAction(
     "mediaSetVolume",
     { playerIndex, value },
@@ -427,7 +452,7 @@ createScript.prototype.mediaSetVolume = function(playerIndex, value) {
   return this;
 };
 
-createScript.prototype.mediaStop = function(playerIndex) {
+createScript.prototype.mediaStop = function (playerIndex) {
   this.pushAction(
     "mediaStop",
     { playerIndex },
