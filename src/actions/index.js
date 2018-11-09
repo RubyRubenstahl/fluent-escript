@@ -1,3 +1,5 @@
+const PQueue = require('p-queue');
+
 const { tokenizeInstruction } = require("../lib");
 
 const createScript = function (name) {
@@ -7,10 +9,10 @@ const createScript = function (name) {
 };
 
 // Tokenize the instruction and push the action onto the action list.
-createScript.prototype.pushAction = function (name, arguments, instructions) {
+createScript.prototype.pushAction = function (name, args, instructions) {
   this.actions.push({
     name,
-    arguments,
+    args,
     instructions,
     tokenized: tokenizeInstruction(instructions)
   });
