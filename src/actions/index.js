@@ -18,6 +18,11 @@ createScript.prototype.pushAction = function (name, args, instructions) {
   });
 };
 
+/**
+Plays the specified cuelist
+@param cuelistIndex {number} - 0-based index of the cuelist to play.
+@returns the script object.
+*/
 createScript.prototype.cuelistPlay = function (cuelistIndex) {
   this.pushAction(
     "cuelistPlay",
@@ -30,6 +35,11 @@ createScript.prototype.cuelistPlay = function (cuelistIndex) {
   return this;
 };
 
+
+/**
+Plays the specifed cue within the cuelist.
+@param cuelistIndex {number}  - 0-based index of the cuelist to play.
+*/
 createScript.prototype.cuePlay = function (cuelistIndex, cueIndex, jump = true) {
   this.pushAction(
     "cuePlay",
