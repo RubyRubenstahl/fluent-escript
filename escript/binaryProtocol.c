@@ -310,27 +310,36 @@ function runAction(int instructionCode)
 
 	//MEDIACONTINUE
 	case 28:
-		notImplemented(instructionCode);
+		int player = readNum(offset);
+		MediaContinue(player);
 		break;
 
 	//MEDIAPAUSE
 	case 29:
-		notImplemented(instructionCode);
+		int player = readNum(offset);
+		MediaPause(player);
 		break;
 
 	//MEDIAPLAY
 	case 30:
-		notImplemented(instructionCode);
+		int player = readNum(offset);
+		int flags = readNum(offset);
+		readString(offset);
+		string filepath = sArg;
+		MediaPlay(player, flags, filepath);		
 		break;
 
 	//MEDIASETVOLUME
 	case 31:
-		notImplemented(instructionCode);
+		int player = readNum(offset);
+		int level = readNum(offset);
+		MediaSetVolumePercent(player);
 		break;
 
 	//MEDIASTOP
 	case 32:
-		notImplemented(instructionCode);
+		int player = readNum(offset);
+		MediaStop(player);
 		break;
 
 	//GETCUELISTS
