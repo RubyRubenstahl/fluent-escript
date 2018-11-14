@@ -326,7 +326,7 @@ function runAction(int instructionCode)
 		int flags = readNum(offset);
 		readString(offset);
 		string filepath = sArg;
-		MediaPlay(player, flags, filepath);		
+		MediaPlay(player, flags, filepath);
 		break;
 
 	//MEDIASETVOLUME
@@ -368,18 +368,15 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break;
 
-	
 	//RESETCUELIST
 	case 37:
 		int index = readNum(offset);
 		CuelistDeleteAllCues(index);
 		result = SUCCESS;
 		break;
-	
+
 		return result;
 	}
-
-	
 }
 
 function setRgbw()
