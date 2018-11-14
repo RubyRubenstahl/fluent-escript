@@ -431,6 +431,12 @@ createScript.prototype.mediaPlay = function (
   repeat = true,
   fullscreen = false
 ) {
+  // Run the mediaContinue action if no filepath was provided
+  if (filePath === undefined) {
+    return this.mediaContinue(playerIndex);
+    1;
+  }
+
   this.pushAction(
     "mediaPlay",
     { playerIndex, filePath, repeat, fullscreen },
