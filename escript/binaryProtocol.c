@@ -333,7 +333,7 @@ function runAction(int instructionCode)
 	case 31:
 		int player = readNum(offset);
 		int level = readNum(offset);
-		MediaSetVolumePercent(player);
+		MediaSetVolumePercent(player, level);
 		break;
 
 	//MEDIASTOP
