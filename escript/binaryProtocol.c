@@ -339,7 +339,7 @@ function runAction(int instructionCode)
 	//MEDIASTOP
 	case 32:
 		int player = readNum(offset);
-		MediaStop(player);
+		MediaStop(player, 0, "");
 		break;
 
 	//GETCUELISTS
