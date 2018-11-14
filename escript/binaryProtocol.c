@@ -375,8 +375,15 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break;
 
-		return result;
+		//PRINTF
+	case 38:
+		readString(offset);
+		string message = sArg;
+		printf(message);
+		result = SUCCESS;
+		break;
 	}
+	return result;
 }
 
 function setRgbw()
@@ -462,7 +469,8 @@ function createActionTable()
 	actions[34] = "GETSHOWSTATE";
 	actions[35] = "CUESETFADETIME";
 	actions[36] = "SETRGB";
-	actions[37] = "RESETCUELIST"
+	actions[37] = "RESETCUELIST";
+	actions[38] = "PRINTF";
 }
 
 RegisterEvent(UdpReceive, OnUdp);

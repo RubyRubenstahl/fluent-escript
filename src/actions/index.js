@@ -449,6 +449,18 @@ createScript.prototype.mediaSetVolume = function(playerIndex, value) {
   return this;
 };
 
+createScript.prototype.printf = function(message) {
+  this.pushAction(
+    "printf",
+    { message },
+    {
+      command: "PRINTF",
+      params: [message]
+    }
+  );
+  return this;
+};
+
 createScript.prototype.mediaStop = function(playerIndex) {
   this.pushAction(
     "mediaStop",
