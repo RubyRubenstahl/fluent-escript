@@ -16,6 +16,12 @@ createScript.prototype.pushAction = function(name, args, instructions) {
   });
 };
 
+
+/**
+Plays the specified cuelist
+@param cuelistIndex {number} - 0-based index of the cuelist to play.
+@returns the script object.
+*/
 createScript.prototype.cuelistPlay = function(cuelistIndex) {
   this.pushAction(
     "cuelistPlay",
@@ -28,6 +34,11 @@ createScript.prototype.cuelistPlay = function(cuelistIndex) {
   return this;
 };
 
+
+/**
+Plays the specifed cue within the cuelist.
+@param cuelistIndex {number}  - 0-based index of the cuelist to play.
+*/
 createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
   this.pushAction(
     "cuePlay",
@@ -449,6 +460,53 @@ createScript.prototype.mediaSetVolume = function(playerIndex, value) {
   return this;
 };
 
+createScript.prototype.mediaVolumeDelta = function (playerIndex, delta) {
+  this.pushAction(
+    "mediaVolumeDelta",
+    { playerIndex, delta },
+    {
+      command: "",
+      params: [playerIndex, delta]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.mediaSkip = function (playerIndex, delta) {
+  this.pushAction(
+    "mediaVolumeDelta",
+    { playerIndex, delta },
+    {
+      command: "MEDIASKIP",
+      params: [playerIndex, delta]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.mediaSkipForward = function(playerIndex){
+	return ths.mediaSkip(playerIndex,1);
+}
+
+createScript.prototype.mediaSkipBacks = function(playerIndex){
+	return ths.mediaSkip(playerIndex,-1);
+}
+
+
+createScript.prototype.mediaSetColorCorrection = function (playerIndex, options,channel) {
+  const {gamma=0, contrast=0, brightness=0} = options;
+  this.pushAction(
+    "mediaSetColorCorrection"
+    { playerIndex, options },
+    {
+      command: "MEDIASETGAMMA",
+      params: [playerIndex, contrast, brightness, gamma, channel]
+    }
+  );
+  return this;
+};
+
+
 createScript.prototype.mediaStop = function(playerIndex) {
   this.pushAction(
     "mediaStop",
@@ -460,27 +518,5 @@ createScript.prototype.mediaStop = function(playerIndex) {
   );
   return this;
 };
-
-/* createScript.prototype.xxxx = function(){
-  this.pushAction(
-  ',
-  {(,
-  {
-    command: "GETCUELISTS",
-    params: []
-  });
-  return this;
-}; */
-
-/* createScript.prototype.xxxx = function(){
-  this.pushAction(
-  ',
-  {(,
-  {
-    command: "GETSHOWSTATE",
-    params: []
-  });
-  return this;
-}; */
 
 module.exports = name => new createScript(name);
