@@ -1,5 +1,7 @@
 const { tokenizeInstruction } = require("../lib");
 
+function intBool = value => Boolean(value) ? 1 : 0;
+
 const createScript = function(name) {
   this.actions = [];
   this.name = name;
@@ -443,17 +445,65 @@ createScript.prototype.printf = function(message) {
 };
 
 
+createScript.prototype.setSwitchState = function(switchName, value){
+  this.pushAction(
+    "setSwitchState",
+    { playerIndex, delta },
+    {
+      command: "SETSWITCHSTATE",
+      params: [switchName, intBool(value)]
+    }
+  );
+  return this;
+}
+
+createScript.prototype.enableBlindMode = function () {
+ return this.setSwitchState('blind', true);
+};
+
+createScript.prototype.disableBlindMode = function () {
+ return this.setSwitchState('blind', false);
+};
+
+createScript.prototype.enableHighlightMode = function () {
+ return this.setSwitchState('highlight', true);
+};
+
+createScript.prototype.disableHighlightMode = function () {
+ return this.setSwitchState('highlight', false);
+};
+
+createScript.prototype.enableNetworkOutput = function () {
+ return this.setSwitchState('network', true);
+};
+
+createScript.prototype.disableNetworkOutput = function () {
+ return this.setSwitchState('network', false);
+};
+
+createScript.prototype.enableTriggers = function () {
+ return this.setSwitchState('triggers', true);
+};
+
+createScript.prototype.disableTriggers = function () {
+ return this.setSwitchState('triggers', false);
+};
+
+
 createScript.prototype.mediaVolumeDelta = function (playerIndex, delta) {
   this.pushAction(
     "mediaVolumeDelta",
     { playerIndex, delta },
     {
-      command: "",
+      command: "MEDIAVOLUMEDELTA",
       params: [playerIndex, delta]
     }
   );
   return this;
 };
+
+
+
 
 createScript.prototype.mediaSkip = function (playerIndex, delta) {
   this.pushAction(

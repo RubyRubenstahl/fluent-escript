@@ -3,21 +3,6 @@
 TimeCodeStart
 TimeCodeStop
 
-## System switches
-SetSwitchState
-	- enableBlindMode
-	- disableBlindMode
-	- toggleBlindMode
-	- enableNetwork
-	- disableNetwork
-	- toggleNetwork
-	- enableTriggerEngine
-	- disableTriggerEngine
-	- toggleTriggerEngine
-	- enableHighlight
-	- disableHighlight
-	- toggleHighlight
-
 ## Sequencer
 SequenceControlPause
 SequenceControlPlay
@@ -41,7 +26,6 @@ VersatileMasterReset
 
 
 #System
-printf
 alert
 DriverSetEnabled
 DriverRestart
