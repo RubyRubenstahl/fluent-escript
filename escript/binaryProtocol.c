@@ -297,7 +297,11 @@ function runAction(int instructionCode)
 
 	//SETSWITCHSTATE
 	case 26:
-		notImplemented(instructionCode);
+		readString(offset);
+		string switchName = sArg;
+		int value = readNum(offset);
+		SetSwitchState(switchName, value);
+		result = SUCCESS;
 		break;
 
 	//VMSETLEVEL
@@ -306,6 +310,7 @@ function runAction(int instructionCode)
 		int level = readNum(offset);
 		int fadeTime = readNum(offset);
 		VersatileMasterStartAutoFade(index, level, fadeTime);
+				result = SUCCESS;
 		break;
 
 	//MEDIACONTINUE
@@ -367,9 +372,34 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break;
 	
-		return result;
 	}
-
+	
+	
+	//MEDIAVOLUMEDELTA
+	case 38:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSetVolumeDeltaPercent(index, delta);
+		result = SUCCESS;
+		break;
+		
+	//MEDIASETGAMMA
+	case 39:
+		int index = readNum(offset);
+		int contrast = readNum(offset);
+		int brightness = readNum(offset);
+		int gamma = readNum(offset);
+		int channel = readNum(offset)
+		MediaSetGamma(index, contrast, brightness, gamma, channel);
+		result = SUCCESS;
+		break;
+	
+	//MEDIASKIP
+	case 40:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSkip(index, delta);
+		
 	
 }
 
@@ -456,7 +486,10 @@ function createActionTable()
 	actions[34] = "GETSHOWSTATE";
 	actions[35] = "CUESETFADETIME";
 	actions[36] = "SETRGB";
-	actions[37] = "RESETCUELIST"
+	actions[37] = "RESETCUELIST";
+	actions[38]= "MEDIAVOLUMEDELTA";
+	actions[39] = "MEDIASETGAMMA";
+	actions[40] = "MEDIASKIP";
 }
 
 RegisterEvent(UdpReceive, OnUdp);
