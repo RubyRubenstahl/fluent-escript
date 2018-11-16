@@ -1,6 +1,5 @@
 // binaryProtocol script comment
 printf("Starting UDP Command listener...\n");
-
 int nBob;
 nBob = BobAllocate(10000);
 int packetLength;
@@ -297,7 +296,11 @@ function runAction(int instructionCode)
 
 	//SETSWITCHSTATE
 	case 26:
-		notImplemented(instructionCode);
+		readString(offset);
+		string switchName = sArg;
+		int value = readNum(offset);
+		SetSwitchState(switchName, value);
+		result = SUCCESS;
 		break;
 
 	//VMSETLEVEL
@@ -306,6 +309,7 @@ function runAction(int instructionCode)
 		int level = readNum(offset);
 		int fadeTime = readNum(offset);
 		VersatileMasterStartAutoFade(index, level, fadeTime);
+				result = SUCCESS;
 		break;
 
 	//MEDIACONTINUE
@@ -373,17 +377,43 @@ function runAction(int instructionCode)
 		int index = readNum(offset);
 		CuelistDeleteAllCues(index);
 		result = SUCCESS;
-		break;
-
-		//PRINTF
-	case 38:
+		break
+	
+  //PRINTF
+	case 39:
 		readString(offset);
 		string message = sArg;
 		printf(message);
 		result = SUCCESS;
 		break;
-	}
-	return result;
+	
+	//MEDIAVOLUMEDELTA
+	case 39:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSetVolumeDeltaPercent(index, delta);
+		result = SUCCESS;
+		break;
+		
+	//MEDIASETGAMMA
+	case 40:
+		int index = readNum(offset);
+		int contrast = readNum(offset);
+		int brightness = readNum(offset);
+		int gamma = readNum(offset);
+		int channel = readNum(offset)
+		MediaSetGamma(index, contrast, brightness, gamma, channel);
+		result = SUCCESS;
+		break;
+	
+	//MEDIASKIP
+	case 41:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSkip(index, delta);
+		result = SUCCESS;
+    break;
+
 }
 
 function setRgbw()
@@ -471,6 +501,10 @@ function createActionTable()
 	actions[36] = "SETRGB";
 	actions[37] = "RESETCUELIST";
 	actions[38] = "PRINTF";
+	actions[39]= "MEDIAVOLUMEDELTA";
+	actions[40] = "MEDIASETGAMMA";
+	actions[41] = "MEDIASKIP";
+
 }
 
 RegisterEvent(UdpReceive, OnUdp);
