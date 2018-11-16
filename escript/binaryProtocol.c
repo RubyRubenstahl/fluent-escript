@@ -291,7 +291,11 @@ function runAction(int instructionCode)
 
 	//GRPCREATE
 	case 25:
-		notImplemented(instructionCode);
+		readString(offset);
+		string groupName = sArg;
+		int selectedOnly = intBool(readNum(offset));
+		GrpCreate(groupName, selectedOnly);
+		result = SUCCESS;
 		break;
 
 	//SETSWITCHSTATE
@@ -413,6 +417,55 @@ function runAction(int instructionCode)
 		MediaSkip(index, delta);
 		result = SUCCESS;
     break;
+    
+    //GRPDELETE
+	case 42:
+		readString(offset);
+		string groupName = sArg;
+		int expand = readNum(offset);
+		result = grpDeleteName(groupName);
+		break;
+
+	//ADDFIXTURE
+	case 43:
+		readString(offset);
+		string fixtureType = sArg;
+		
+		readString(offset);
+		string screenName = sArg;
+
+		const screenId = readNum(offset);
+		const sectionIndex = reqdNum(offset);
+		const universe = readNum(offset);
+		const address = readNum(offset);
+		AddFixture(fixtureType, screenName, screenId, sectionIndex, universe, address);
+		result = SUCCESS;
+	break;
+	
+	//SET3DPOSITION
+	case 44:
+	notImplemented(instructionCode);
+	break;
+
+	//SETFIXTURESECTION
+	case 45:
+	notImplemented(instructionCode);
+	break;
+
+	//SETPREHEAT
+	case 46:
+	notImplemented(instructionCode);
+	break;
+
+	//FLUSHPATCH
+	case 47:
+	notImplemented(instructionCode);
+	break;
+
+	//PATCHDONE
+	case 48:
+	notImplemented(instructionCode);
+	break;
 
 }
 
@@ -504,8 +557,17 @@ function createActionTable()
 	actions[39]= "MEDIAVOLUMEDELTA";
 	actions[40] = "MEDIASETGAMMA";
 	actions[41] = "MEDIASKIP";
+	actions[42] = "GRPDELETE";
+	actions[43] = "ADDFIXTURE";
+	actions[44] = "SET3DPOSITION";
+	actions[45] = "SETFIXTURESECTION";
+	actions[46] = "SETPREHEAT";
+	actions[47] = "FLUSHPATCH";
+	actions[48] = "PATCHDONE";
 
 }
+
+
 
 RegisterEvent(UdpReceive, OnUdp);
 Suspend();

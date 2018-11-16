@@ -31,8 +31,3 @@ DriverSetEnabled
 DriverRestart
 DriverRestart
 
-
-#Groups
-grpUse
-grpDeleteName
-grpCreate

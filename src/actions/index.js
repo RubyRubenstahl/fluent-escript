@@ -552,4 +552,15 @@ createScript.prototype.mediaStop = function(playerIndex) {
   return this;
 };
 
+createScript.prototype.addFixture = function addFixture(fixtureType, screenName, screenId, sectionIndex, universe, address){
+	this.pushAction(
+	    "addFixture"
+	    { fixtureType, screenName, screenId, sectionIndex, universe, address },
+	    {
+	      command: "ADDFIXTURE",
+	      params: [fixtureType, screenName, screenId, sectionIndex, universe, address]
+	    }
+	  );
+}
+
 module.exports = name => new createScript(name);
