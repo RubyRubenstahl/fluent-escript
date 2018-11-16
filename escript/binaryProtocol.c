@@ -378,8 +378,7 @@ function runAction(int instructionCode)
 		int index = readNum(offset);
 		CuelistDeleteAllCues(index);
 		result = SUCCESS;
-		break;
-	}
+		break
 	
 	
 	//MEDIAVOLUMEDELTA

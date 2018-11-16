@@ -39,6 +39,7 @@ createScript.prototype.cuelistPlay = function(cuelistIndex) {
 Plays the specifed cue within the cuelist.
 @param cuelistIndex {number}  - 0-based index of the cuelist to play.
 */
+
 createScript.prototype.cuePlay = function(cuelistIndex, cueIndex, jump = true) {
   this.pushAction(
     "cuePlay",
@@ -320,27 +321,6 @@ createScript.prototype.fixtureSetLevel = function(level) {
   return this;
 };
 
-/* createScript.prototype.xxxx = function(){
-  this.pushAction(
-  ',
-  {(,
-  {
-    command: "SETLEVEL",
-    params: []
-  });
-  return this;
-}; */
-
-/* createScript.prototype.xxxx = function(){
-  this.pushAction(
-  ',
-  {(,
-  {
-    command: "SETRGBW",
-    params: []
-  });
-  return this;
-}; */
 
 createScript.prototype.proClear = function() {
   this.pushAction(
@@ -378,16 +358,6 @@ createScript.prototype.grpCreate = function(name, selectedOnly = true) {
   return this;
 };
 
-/* createScript.prototype.xxxx = function(){
-  this.pushAction(
-  ',
-  {(,
-  {
-    command: "SETSWITCHSTATE",
-    params: []
-  });
-  return this;
-}; */
 
 createScript.prototype.vmSetLevel = function(vmIndex, value, fadeTime = 100) {
   this.pushAction(
