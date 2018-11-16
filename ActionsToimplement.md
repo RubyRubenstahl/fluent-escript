@@ -36,11 +36,6 @@ SetPreheat
 PatchFlush
 PatchDone
 
-#Media
-MediaSetGamma
-MediaSetVolumeDeltaPercent
-MediaSkip
-
 #Masters
 VersatileMasterReset
 

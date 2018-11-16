@@ -464,6 +464,53 @@ createScript.prototype.mediaSetVolume = function (playerIndex, value) {
   return this;
 };
 
+createScript.prototype.mediaVolumeDelta = function (playerIndex, delta) {
+  this.pushAction(
+    "mediaVolumeDelta",
+    { playerIndex, delta },
+    {
+      command: "",
+      params: [playerIndex, delta]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.mediaSkip = function (playerIndex, delta) {
+  this.pushAction(
+    "mediaVolumeDelta",
+    { playerIndex, delta },
+    {
+      command: "MEDIASKIP",
+      params: [playerIndex, delta]
+    }
+  );
+  return this;
+};
+
+createScript.prototype.mediaSkipForward = function(playerIndex){
+	return ths.mediaSkip(playerIndex,1);
+}
+
+createScript.prototype.mediaSkipBacks = function(playerIndex){
+	return ths.mediaSkip(playerIndex,-1);
+}
+
+
+createScript.prototype.mediaSetColorCorrection = function (playerIndex, options,channel) {
+  const {gamma=0, contrast=0, brightness=0} = options;
+  this.pushAction(
+    "mediaSetColorCorrection"
+    { playerIndex, options },
+    {
+      command: "MEDIASETGAMMA",
+      params: [playerIndex, contrast, brightness, gamma, channel]
+    }
+  );
+  return this;
+};
+
+
 createScript.prototype.mediaStop = function (playerIndex) {
   this.pushAction(
     "mediaStop",
