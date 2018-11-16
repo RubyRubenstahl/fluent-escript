@@ -430,6 +430,19 @@ createScript.prototype.mediaSetVolume = function(playerIndex, value) {
   return this;
 };
 
+createScript.prototype.printf = function(message) {
+  this.pushAction(
+    "printf",
+    { message },
+    {
+      command: "PRINTF",
+      params: [message]
+    }
+  );
+  return this;
+};
+
+
 createScript.prototype.mediaVolumeDelta = function (playerIndex, delta) {
   this.pushAction(
     "mediaVolumeDelta",

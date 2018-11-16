@@ -1,6 +1,5 @@
 // binaryProtocol script comment
 printf("Starting UDP Command listener...\n");
-
 int nBob;
 nBob = BobAllocate(10000);
 int packetLength;
@@ -380,9 +379,16 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break
 	
+  //PRINTF
+	case 39:
+		readString(offset);
+		string message = sArg;
+		printf(message);
+		result = SUCCESS;
+		break;
 	
 	//MEDIAVOLUMEDELTA
-	case 38:
+	case 39:
 		int index = readNum(offset);
 		int delta = readNum(offset);
 		MediaSetVolumeDeltaPercent(index, delta);
@@ -390,7 +396,7 @@ function runAction(int instructionCode)
 		break;
 		
 	//MEDIASETGAMMA
-	case 39:
+	case 40:
 		int index = readNum(offset);
 		int contrast = readNum(offset);
 		int brightness = readNum(offset);
@@ -401,12 +407,13 @@ function runAction(int instructionCode)
 		break;
 	
 	//MEDIASKIP
-	case 40:
+	case 41:
 		int index = readNum(offset);
 		int delta = readNum(offset);
 		MediaSkip(index, delta);
 		result = SUCCESS;
     break;
+
 }
 
 function setRgbw()
@@ -493,9 +500,11 @@ function createActionTable()
 	actions[35] = "CUESETFADETIME";
 	actions[36] = "SETRGB";
 	actions[37] = "RESETCUELIST";
-	actions[38]= "MEDIAVOLUMEDELTA";
-	actions[39] = "MEDIASETGAMMA";
-	actions[40] = "MEDIASKIP";
+	actions[38] = "PRINTF";
+	actions[39]= "MEDIAVOLUMEDELTA";
+	actions[40] = "MEDIASETGAMMA";
+	actions[41] = "MEDIASKIP";
+
 }
 
 RegisterEvent(UdpReceive, OnUdp);
