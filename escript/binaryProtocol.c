@@ -313,7 +313,7 @@ function runAction(int instructionCode)
 		int level = readNum(offset);
 		int fadeTime = readNum(offset);
 		VersatileMasterStartAutoFade(index, level, fadeTime);
-				result = SUCCESS;
+		result = SUCCESS;
 		break;
 
 	//MEDIACONTINUE
@@ -382,15 +382,15 @@ function runAction(int instructionCode)
 		CuelistDeleteAllCues(index);
 		result = SUCCESS;
 		break;
-	
-  //PRINTF
+
+	//PRINTF
 	case 38:
 		readString(offset);
 		string message = sArg;
 		printf(message);
 		result = SUCCESS;
 		break;
-	
+
 	//MEDIAVOLUMEDELTA
 	case 39:
 		int index = readNum(offset);
@@ -398,7 +398,7 @@ function runAction(int instructionCode)
 		MediaSetVolumeDeltaPercent(index, delta);
 		result = SUCCESS;
 		break;
-		
+
 	//MEDIASETGAMMA
 	case 40:
 		int index = readNum(offset);
@@ -409,16 +409,16 @@ function runAction(int instructionCode)
 		MediaSetGamma(index, contrast, brightness, gamma, channel);
 		result = SUCCESS;
 		break;
-	
+
 	//MEDIASKIP
 	case 41:
 		int index = readNum(offset);
 		int delta = readNum(offset);
 		MediaSkip(index, delta);
 		result = SUCCESS;
-    break;
-    
-    //GRPDELETE
+		break;
+
+	//GRPDELETE
 	case 42:
 		readString(offset);
 		string groupName = sArg;
@@ -430,7 +430,7 @@ function runAction(int instructionCode)
 	case 43:
 		readString(offset);
 		string fixtureType = sArg;
-		
+
 		readString(offset);
 		string screenName = sArg;
 
@@ -440,33 +440,40 @@ function runAction(int instructionCode)
 		const address = readNum(offset);
 		AddFixture(fixtureType, screenName, screenId, sectionIndex, universe, address);
 		result = SUCCESS;
-	break;
-	
+		break;
+
 	//SET3DPOSITION
 	case 44:
-	notImplemented(instructionCode);
-	break;
+		notImplemented(instructionCode);
+		break;
 
 	//SETFIXTURESECTION
 	case 45:
-	notImplemented(instructionCode);
-	break;
+		notImplemented(instructionCode);
+		break;
 
 	//SETPREHEAT
 	case 46:
-	notImplemented(instructionCode);
-	break;
+		notImplemented(instructionCode);
+		break;
 
 	//FLUSHPATCH
 	case 47:
-	notImplemented(instructionCode);
-	break;
+		notImplemented(instructionCode);
+		break;
 
 	//PATCHDONE
 	case 48:
-	notImplemented(instructionCode);
-	break;
+		notImplemented(instructionCode);
+		break;
 
+		//CUELISTSETLEVEL
+	case 49:
+		int cuelist = readNum(offset);
+		int level = readNum(offset);
+		CuelistSubMasterSetValue(cuelist, level);
+		break;
+	}
 }
 
 function setRgbw()
@@ -554,7 +561,7 @@ function createActionTable()
 	actions[36] = "SETRGB";
 	actions[37] = "RESETCUELIST";
 	actions[38] = "PRINTF";
-	actions[39]= "MEDIAVOLUMEDELTA";
+	actions[39] = "MEDIAVOLUMEDELTA";
 	actions[40] = "MEDIASETGAMMA";
 	actions[41] = "MEDIASKIP";
 	actions[42] = "GRPDELETE";
@@ -564,10 +571,8 @@ function createActionTable()
 	actions[46] = "SETPREHEAT";
 	actions[47] = "FLUSHPATCH";
 	actions[48] = "PATCHDONE";
-
+	actions[49] = "CUELISTSETLEVEL";
 }
-
-
 
 RegisterEvent(UdpReceive, OnUdp);
 Suspend();
