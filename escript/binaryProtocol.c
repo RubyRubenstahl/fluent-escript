@@ -384,7 +384,7 @@ function runAction(int instructionCode)
 		break;
 	
   //PRINTF
-	case 39:
+	case 38:
 		readString(offset);
 		string message = sArg;
 		printf(message);
@@ -405,7 +405,7 @@ function runAction(int instructionCode)
 		int contrast = readNum(offset);
 		int brightness = readNum(offset);
 		int gamma = readNum(offset);
-		int channel = readNum(offset)
+		int channel = readNum(offset);
 		MediaSetGamma(index, contrast, brightness, gamma, channel);
 		result = SUCCESS;
 		break;
