@@ -1,6 +1,5 @@
 // binaryProtocol script comment
 printf("Starting UDP Command listener...\n");
-
 int nBob;
 nBob = BobAllocate(10000);
 int packetLength;
@@ -292,12 +291,20 @@ function runAction(int instructionCode)
 
 	//GRPCREATE
 	case 25:
-		notImplemented(instructionCode);
+		readString(offset);
+		string groupName = sArg;
+		int selectedOnly = intBool(readNum(offset));
+		GrpCreate(groupName, selectedOnly);
+		result = SUCCESS;
 		break;
 
 	//SETSWITCHSTATE
 	case 26:
-		notImplemented(instructionCode);
+		readString(offset);
+		string switchName = sArg;
+		int value = readNum(offset);
+		SetSwitchState(switchName, value);
+		result = SUCCESS;
 		break;
 
 	//VMSETLEVEL
@@ -306,6 +313,7 @@ function runAction(int instructionCode)
 		int level = readNum(offset);
 		int fadeTime = readNum(offset);
 		VersatileMasterStartAutoFade(index, level, fadeTime);
+		result = SUCCESS;
 		break;
 
 	//MEDIACONTINUE
@@ -375,7 +383,96 @@ function runAction(int instructionCode)
 		result = SUCCESS;
 		break;
 
-		return result;
+	//PRINTF
+	case 38:
+		readString(offset);
+		string message = sArg;
+		printf(message);
+		result = SUCCESS;
+		break;
+
+	//MEDIAVOLUMEDELTA
+	case 39:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSetVolumeDeltaPercent(index, delta);
+		result = SUCCESS;
+		break;
+
+	//MEDIASETGAMMA
+	case 40:
+		int index = readNum(offset);
+		int contrast = readNum(offset);
+		int brightness = readNum(offset);
+		int gamma = readNum(offset);
+		int channel = readNum(offset);
+		MediaSetGamma(index, contrast, brightness, gamma, channel);
+		result = SUCCESS;
+		break;
+
+	//MEDIASKIP
+	case 41:
+		int index = readNum(offset);
+		int delta = readNum(offset);
+		MediaSkip(index, delta);
+		result = SUCCESS;
+		break;
+
+	//GRPDELETE
+	case 42:
+		readString(offset);
+		string groupName = sArg;
+		int expand = readNum(offset);
+		result = grpDeleteName(groupName);
+		break;
+
+	//ADDFIXTURE
+	case 43:
+		readString(offset);
+		string fixtureType = sArg;
+
+		readString(offset);
+		string screenName = sArg;
+
+		const screenId = readNum(offset);
+		const sectionIndex = reqdNum(offset);
+		const universe = readNum(offset);
+		const address = readNum(offset);
+		AddFixture(fixtureType, screenName, screenId, sectionIndex, universe, address);
+		result = SUCCESS;
+		break;
+
+	//SET3DPOSITION
+	case 44:
+		notImplemented(instructionCode);
+		break;
+
+	//SETFIXTURESECTION
+	case 45:
+		notImplemented(instructionCode);
+		break;
+
+	//SETPREHEAT
+	case 46:
+		notImplemented(instructionCode);
+		break;
+
+	//FLUSHPATCH
+	case 47:
+		notImplemented(instructionCode);
+		break;
+
+	//PATCHDONE
+	case 48:
+		notImplemented(instructionCode);
+		break;
+
+		//CUELISTSETLEVEL
+	case 49:
+		int cuelist = readNum(offset);
+		int level = readNum(offset);
+		CuelistSubMasterSetValue(cuelist, level);
+		break;
 	}
 }
 
@@ -462,7 +559,19 @@ function createActionTable()
 	actions[34] = "GETSHOWSTATE";
 	actions[35] = "CUESETFADETIME";
 	actions[36] = "SETRGB";
-	actions[37] = "RESETCUELIST"
+	actions[37] = "RESETCUELIST";
+	actions[38] = "PRINTF";
+	actions[39] = "MEDIAVOLUMEDELTA";
+	actions[40] = "MEDIASETGAMMA";
+	actions[41] = "MEDIASKIP";
+	actions[42] = "GRPDELETE";
+	actions[43] = "ADDFIXTURE";
+	actions[44] = "SET3DPOSITION";
+	actions[45] = "SETFIXTURESECTION";
+	actions[46] = "SETPREHEAT";
+	actions[47] = "FLUSHPATCH";
+	actions[48] = "PATCHDONE";
+	actions[49] = "CUELISTSETLEVEL";
 }
 
 RegisterEvent(UdpReceive, OnUdp);
