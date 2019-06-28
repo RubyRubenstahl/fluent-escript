@@ -51,6 +51,19 @@ createScript.prototype.cuelistSetLevel = function (cuelist, level) {
   return this;
 };
 
+createScript.prototype.cuelistSetCurrent = function (cuelist) {
+
+  this.pushAction(
+    "cuelistSetCurrent",
+    { cuelist },
+    {
+      command: "CUELISTSETCURRENT",
+      params: [cuelist]
+    }
+  );
+  return this;
+};
+
 /**
 Plays the specifed cue within the cuelist.
 @param cuelistIndex {number}  - 0-based index of the cuelist to play.

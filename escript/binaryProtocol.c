@@ -473,7 +473,12 @@ function runAction(int instructionCode)
 		int level = readNum(offset);
 		CuelistSubMasterSetValue(cuelist, level);
 		break;
-	}
+		//CUELISTSETCURRENT
+	case 50:
+		int cuelist = readNum(offset);
+		CuelistSetCurrent(cuelist);
+		break;
+		}
 }
 
 function setRgbw()
