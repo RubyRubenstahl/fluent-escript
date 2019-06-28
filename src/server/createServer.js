@@ -1,6 +1,6 @@
 const dgram = require("dgram");
-const { compileScript } = require('../lib')
-
+const { compileScript } = require("../lib");
+const queue = require("queue");
 const defaultOpts = {
   hostAddress: "localhost",
   listenPort: 9001,
@@ -9,7 +9,11 @@ const defaultOpts = {
 };
 
 function createServer(options = {}) {
-  this.queue = [];
+  const q = queue({
+    concurrency: 1,
+    timout: 16,
+    autostart: true
+  });
 
   const { hostAddress, listenport, sendAddress, sendPort } = {
     ...defaultOpts,
@@ -19,30 +23,29 @@ function createServer(options = {}) {
   const socket = dgram.createSocket("udp4");
   socket.bind(9001);
 
-  this.runScript = function runScript(script) {
-    this.queue.push(script);
+  this.runScript = script => {
+    q.push(cb => {
+      this._sendScript(script);
+      cb();
+    });
   };
 
-  setInterval(() => {
-    if (this.queue.length > 0) {
-      const script = this.queue.shift();
-      this._sendScript(script);
-    }
-  }, 16);
+  q.on("success", () => {
+    console.log("Script sent");
+  });
 
-  this._sendScript = function (script) {
+  q.on("error", () => console.error("Error sending e:script"));
+
+  this._sendScript = function(script) {
     const packetData = compileScript(script);
-    console.log('Sending script: TS=' + new Date())
 
     socket.send(packetData, sendPort, sendAddress, err => {
       if (err) {
-        console.error('Error sending script to programmer: ' + err.message)
+        console.error("Error sending script to programmer: " + err.message);
       }
-    }
-    );
-  }
+    });
+  };
   return this;
 }
 
 module.exports = createServer;
-
