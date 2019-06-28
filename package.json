@@ -1,10 +1,6 @@
 {
   "name": "fluent-escript",
-<<<<<<< HEAD
-  "version": "0.2.0",
-=======
   "version": "0.3.0",
->>>>>>> e63220f502d1212c6c908466fd30eadfdae3e948
   "description": "",
   "main": "src/index.js",
   "scripts": {
