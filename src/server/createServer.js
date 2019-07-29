@@ -36,7 +36,11 @@ function createServer(options = {}) {
 
   q.on("error", () => console.error("Error sending e:script"));
 
-  this._sendScript = function(script) {
+  this.destroy = function () {
+    socket.close();
+  }
+
+  this._sendScript = function (script) {
     const packetData = compileScript(script);
 
     socket.send(packetData, sendPort, sendAddress, err => {
