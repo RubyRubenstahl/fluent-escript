@@ -22,6 +22,11 @@ function createServer(options = {}) {
 
   const socket = dgram.createSocket("udp4");
   socket.bind(9001);
+  socket.on("error", err => {
+    console.log(
+      `Failed to connect to programmer on socket reason:"${err.message}"`
+    );
+  });
 
   this.runScript = script => {
     q.push(cb => {
@@ -36,11 +41,11 @@ function createServer(options = {}) {
 
   q.on("error", () => console.error("Error sending e:script"));
 
-  this.destroy = function () {
+  this.destroy = function() {
     socket.close();
-  }
+  };
 
-  this._sendScript = function (script) {
+  this._sendScript = function(script) {
     const packetData = compileScript(script);
 
     socket.send(packetData, sendPort, sendAddress, err => {
