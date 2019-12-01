@@ -28,15 +28,15 @@ function createServer(options = {}) {
     );
   });
 
-  this.runScript = script => {
+  this.runScript = async script => {
     q.push(cb => {
       this._sendScript(script);
       cb();
     });
   };
 
+  
   q.on("success", () => {
-    console.log("Script sent");
   });
 
   q.on("error", () => console.error("Error sending e:script"));
