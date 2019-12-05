@@ -467,18 +467,25 @@ function runAction(int instructionCode)
 		notImplemented(instructionCode);
 		break;
 
-		//CUELISTSETLEVEL
+	//CUELISTSETLEVEL
 	case 49:
 		int cuelist = readNum(offset);
 		int level = readNum(offset);
 		CuelistSubMasterSetValue(cuelist, level);
 		break;
-		//CUELISTSETCURRENT
+	//CUELISTSETCURRENT
 	case 50:
 		int cuelist = readNum(offset);
 		CuelistSetCurrent(cuelist);
 		break;
-		}
+		
+	//GRPDELETE
+	case 51:
+		readString(offset);
+		string id = sArg;
+		printf("HEARTBEAT: %s", id);
+		break;
+	}
 }
 
 function setRgbw()
@@ -577,6 +584,8 @@ function createActionTable()
 	actions[47] = "FLUSHPATCH";
 	actions[48] = "PATCHDONE";
 	actions[49] = "CUELISTSETLEVEL";
+	actions[50] = "CUELISTSETCURRENT";
+	actions[51] = "HEARTBEAT";
 }
 
 RegisterEvent(UdpReceive, OnUdp);

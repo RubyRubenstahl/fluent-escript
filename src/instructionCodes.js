@@ -50,5 +50,6 @@ module.exports = {
   PATCHDONE: 48,
   CUELISTSETLEVEL: 49,
   CUELISTSETCURRENT: 50,
+  HEARTBEAT: 51
 };
 

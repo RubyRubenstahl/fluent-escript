@@ -579,6 +579,18 @@ createScript.prototype.mediaStop = function (playerIndex) {
   return this;
 };
 
+createScript.prototype.heartbeat = function(id) {
+  this.pushAction(
+    "heartbeat",
+    { id },
+    {
+      command: "HEARTBEAT",
+      params: [id]
+    }
+  );
+  return this;
+};
+
 createScript.prototype.addFixture = function addFixture(fixtureType, screenName, screenId, sectionIndex, universe, address) {
   this.pushAction(
     "addFixture",
