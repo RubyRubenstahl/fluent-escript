@@ -23,6 +23,8 @@
   "author": "Ruby Rubenstahl",
   "license": "MIT",
   "dependencies": {
+    "dirty-json": "^0.7.1",
+    "json5": "^2.1.1",
     "lodash.get": "^4.4.2",
     "queue": "^5.0.0",
     "safe-eval": "^0.4.1",

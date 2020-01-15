@@ -479,7 +479,7 @@ function runAction(int instructionCode)
 		CuelistSetCurrent(cuelist);
 		break;
 		
-	//GRPDELETE
+	//HEARTBEAT
 	case 51:
 		readString(offset);
 		string id = sArg;

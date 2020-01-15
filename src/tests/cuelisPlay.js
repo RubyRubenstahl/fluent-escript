@@ -1,4 +1,8 @@
-const {programmer} = require('../index');
+const {createServer} = require('../index');
 
-programmer.cuelistStop(5)
+
+
+programmer = new createServer();
+
+programmer.on("message", console.log);
 

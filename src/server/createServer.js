@@ -1,4 +1,7 @@
 const dgram = require("dgram");
+const json5 = require("json5");
+const util = require('util');
+const EventEmitter = require("events").EventEmitter;
 const { compileScript } = require("../lib");
 const queue = require("queue");
 const defaultOpts = {
@@ -15,18 +18,32 @@ function createServer(options = {}) {
     autostart: true
   });
 
-  const { hostAddress, listenport, sendAddress, sendPort } = {
+  
+  const { hostAddress, listenPort, sendAddress, sendPort } = {
     ...defaultOpts,
     ...options
   };
 
   const socket = dgram.createSocket("udp4");
-  socket.bind(9001);
+  socket.bind(listenPort);
   socket.on("error", err => {
     console.log(
       `Failed to connect to programmer on socket reason:"${err.message}"`
     );
   });
+
+    socket.on("listening", message => {
+      console.log('listening on ' + listenPort)
+    });
+
+  socket.on('message', message => {
+    // Convert to string and strip null
+    const msgStr = message.toString().replace(/\0/g, '');
+    const msgData = json5.parse(msgStr);
+    // console.log(msgData)
+    this.emit(msgData.type, msgData)
+    this.emit('message', msgData)
+  })
 
   this.runScript = async script => {
     q.push(cb => {
@@ -57,4 +74,5 @@ function createServer(options = {}) {
   return this;
 }
 
+util.inherits(createServer, EventEmitter);
 module.exports = createServer;
