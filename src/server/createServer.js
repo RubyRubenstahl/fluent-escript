@@ -38,7 +38,7 @@ function createServer(options = {}) {
 
   socket.on('message', message => {
     // Convert to string and strip null
-      const msgStr = message.toString().replace(/\0/g, "");
+      const msgStr = message.toString().replace(/\\/g, '\\\\');
     try {
 
       const msgData = json5.parse(msgStr);
