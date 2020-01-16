@@ -602,4 +602,21 @@ createScript.prototype.addFixture = function addFixture(fixtureType, screenName,
   );
 }
 
+
+// Normalized from 0...4096 to 0...100
+createScript.prototype.init = function () {
+  
+  this.pushAction(
+    "INIT",
+    {},
+    {
+      command: "INIT",
+      params: []
+    }
+  );
+  return this;
+};
+
+
+
 module.exports = name => new createScript(name);

@@ -482,10 +482,18 @@ function runAction(int instructionCode)
 	//HEARTBEAT
 	case 51:
 		readString(offset);
-		string id = sArg;
-		printf("HEARTBEAT: %s", id);
+		printf("HEARTBEAT\n", id);
 		break;
 	}
+	
+	//INIT
+	case 52:
+		if(!exists(_initState)){
+			int _initState;
+		}
+		_initState=0;		
+		break;
+	
 }
 
 function setRgbw()
@@ -586,6 +594,7 @@ function createActionTable()
 	actions[49] = "CUELISTSETLEVEL";
 	actions[50] = "CUELISTSETCURRENT";
 	actions[51] = "HEARTBEAT";
+	actions[52] = "INIT";
 }
 
 RegisterEvent(UdpReceive, OnUdp);
