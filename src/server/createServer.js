@@ -38,11 +38,15 @@ function createServer(options = {}) {
 
   socket.on('message', message => {
     // Convert to string and strip null
-    const msgStr = message.toString().replace(/\0/g, '');
-    const msgData = json5.parse(msgStr);
-    // console.log(msgData)
-    this.emit(msgData.type, msgData)
-    this.emit('message', msgData)
+      const msgStr = message.toString().replace(/\0/g, "");
+    try {
+
+      const msgData = json5.parse(msgStr);
+      this.emit(msgData.type, msgData)
+      this.emit('message', msgData)
+    } catch (err) {
+      this.emit('error', err);
+    }
   })
 
   this.runScript = async script => {
