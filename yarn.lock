@@ -2,10 +2,54 @@
 # yarn lockfile v1
 
 
+dirty-json@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/dirty-json/-/dirty-json-0.7.1.tgz#ecdd81189a915664c071365d519ecad20d65fa11"
+  dependencies:
+    lex "^1.7.9"
+    unescape-js "^1.0.8"
+    utf8 "^2.1.2"
+
+inherits@~2.0.3:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
+
+json5@^2.1.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.2.tgz#64471c5bdcc564c18f7c1d4df2e2297f2457c5ab"
+
+lex@^1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/lex/-/lex-1.7.9.tgz#5d5636ccef574348362938b79a47f0eed8ed0d43"
+
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
 
+queue@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/queue/-/queue-5.0.1.tgz#17b7d8b8f9ecd563b8b160d4f469b78f5573a368"
+  dependencies:
+    inherits "~2.0.3"
+
+safe-eval@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/safe-eval/-/safe-eval-0.4.1.tgz#e54ba5a1bbdec795d488f6c8765e0c2a78b4cdc0"
+
 smart-buffer@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-4.0.1.tgz#07ea1ca8d4db24eb4cac86537d7d18995221ace3"
+
+string.fromcodepoint@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/string.fromcodepoint/-/string.fromcodepoint-0.2.1.tgz#8d978333c0bc92538f50f383e4888f3e5619d653"
+
+unescape-js@^1.0.8:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/unescape-js/-/unescape-js-1.1.4.tgz#4bc6389c499cb055a98364a0b3094e1c3d5da395"
+  dependencies:
+    string.fromcodepoint "^0.2.1"
+
+utf8@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/utf8/-/utf8-2.1.2.tgz#1fa0d9270e9be850d9b05027f63519bf46457d96"
